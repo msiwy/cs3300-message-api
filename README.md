@@ -7,6 +7,40 @@ Web Server / REST API
 
 # Specifications
 
+## Authentication 
+
+To authenticate, send a GET request to /auth with the parameter id set to your username. 
+### Request
+```
+GET /auth?id=<user_name>
+```
+### Response
+```
+{
+	success : true
+userId : 1234		// -1 for failure
+}
+```
+
+## User
+
+### Request
+```
+GET /user?id=<user_id>
+```
+### Response
+```
+{
+	userName : “Doug”
+	dateCreated :  1433453749290	// In milliseconds
+groups : [1, 12, 56]		// Group IDs	
+????
+}
+```
+### Request
+```
+
+
 ## Message
 
 ### Request
@@ -49,5 +83,6 @@ POST /document
 ```
 GET /document?id=<document_id>
 ```
+
 
 
