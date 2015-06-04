@@ -9,6 +9,7 @@ Web Server / REST API
 
 ## Message
 
+### Request
 ```
 POST /message
 {
@@ -17,10 +18,22 @@ POST /message
   content: "Hey"
 }
 ```
+### Response
+```
+{}
+```
 
+
+### Request
 ```
 GET /message?id=<message_id>
 ```
+### Response
+```
+{}
+```
+
+
 
 ## Document
 
