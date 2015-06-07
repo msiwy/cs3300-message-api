@@ -6,13 +6,15 @@ Web Server / REST API
 # Specifications
 ## Authentication 
 ### Authenticate a user
-To authenticate a user, send a GET request to /auth with the parameter name set to your username. This request is responded by a unique int : userId. -1 is responded if the authentication fails, for example if parameter name is an empty String
+To authenticate a user, send a GET request to /auth with the parameter name set to your username. This request is responded by a unique int : userId. -1 is returned if the authentication fails, for example if parameter name is an empty String
 #### Request
 | Request Parameter       | Type          | Description  |
 | -------------   | ------------- | ------------ |
 | name            | String	| User name being authenticated. |
 ```
-GET /auth?name=<String : user_name>
+GET /auth?name=<user_name>
+
+GET /auth?name=tim
 ```
 #### Response
 | Response Variable        | Type          | Description  |
@@ -31,33 +33,33 @@ To request information regarding an existing user, send a GET request to /user w
 | -------------   | ------------- | ------------ |
 | userName            | String	  |  The User Name for the user you are fetching|
 ```
-GET /user?userName=<String : user_name>
+GET /user?userName=<user_name>
+
+GET /user?userName=david
 ```
 #### Response
 | Response Parameter       | Type          | Description  |
 | -------------   | ------------- | ------------ |
 | userId            | int	  | The GUID for the user |
-| dateCreated | long | The date the user was created in milliseconds
+| dateCreated | long | The date the user was created in milliseconds |
 | groups | int[] | An array of groupId's the user belongs to |
 ```
 {
 	userId : 1234,
 	dateCreated :  1433453749290,	// In milliseconds
 	groups : [1, 12, 56],		// Group IDs	
-	????
 }
 ```
 ### Create a user
-To create a user, send a POST request to /user as a JSON object containing a String : username. An int : userId and long : dateCreated will be returned. 
+To create a user, send a POST request to /user passing the parameter newUser. An int : userId and long : dateCreated will be returned. 
 #### Request
 | Request Parameter | Type | Description  |
 | ------------- | ------------- | ------------ |
-| userName | String | Name of the user being created |
+| newUser | String | Name of the user being created |
 ```
-POST /user
-{
-	name : “Doug”
-}
+POST /user?newUser=<new_user_name>
+
+POST /user?newUser=ted
 ```
 #### Response
 | Response Variable | Type | Description  |
@@ -72,6 +74,7 @@ POST /user
 ```
 ## Group
 ### Create a group
+To create a group, send a POST request to /group with a JSON object containing the String : owner and String : groupName.
 #### Request
 | Request Parameter | Type | Description  |
 | ------------- | ------------- | ------------ |
@@ -89,10 +92,14 @@ POST /group
 | ------------- | ------------- | ------------ |
 | success | boolean | Returns true if the group was created |
 | groupId | int | Generated GUID for the group | 
+| owner | String | The owner of the group |
+| userIds | int[] | An array containing the GUIDs for all users in the group, this will initially only have the owner's userId |
 ```
 {
 	success : true,
-	groupId : 56
+	groupId : 56,
+	owner : "Doug",
+	userIds : 1234		// The owner's userId
 }
 ```
 ### Get a group's info
@@ -102,6 +109,8 @@ POST /group
 | groupName | String | Name of the group being fetched |
 ```
 GET /group?groupName=<group_name>
+
+GET /group?groupName=Hangout
 ```
 #### Response
 | Response Variables | Type | Description  |
@@ -109,7 +118,7 @@ GET /group?groupName=<group_name>
 | groupId | int | The GUID of the group being fetched. -1 is returned if it does not exist   |
 | groupName | String | The name of the group |
 | userIds | int[] | An array containing the GUIDs for all users in the group |
-| messageIds | int[] | An array contianing the GUIDs for all messages in the group |
+| messageIds | int[] | An array containing the GUIDs for all messages in the group |
 | dateCreated | long | The date the user was created in milliseconds |
 | owner | String | The username of the user that created the group |
 
@@ -125,12 +134,12 @@ GET /group?groupName=<group_name>
 ```
 ## Message
 ### Send a message
-To send a message, send a POST request to /message as a JSON object containing the parameters: String : from (username), String : to (user or chatroom name), and String : content. A successful request will be responded with boolean : success (true), a unique int : messageId, a unique int : groupId and a long : dateCreated. An unsuccessful request will be responded with a boolean : success (false) and an error object with a code and description of the error. 
+To send a message, send a POST request to /message as a JSON object containing the parameters: String : from (username), String : to (user or chatroom name), and String : content. A successful request will be responded with boolean : success (true), an int : messageId, an int : groupId and a long : dateCreated. An unsuccessful request will be responded with a boolean : success (false) and an error object with a code and description of the error. 
 #### Request
 | Request Parameter | Type | Description  |
 | ------------- | ------------- | ------------ |
 | sender | String | The userName of the user sending the message  |
-| recipient | String | The userName/groupName of the user/group receiveing the message |
+| recipient | String | The userName/groupName of the user/group receiving  the message |
 | content | String | The contents of the message being sent |
 ```
 POST /message
@@ -181,6 +190,8 @@ Failure
 | id | String | The messageId for the message being fetched |
 ```
 GET /message?id=<message_id>
+
+GET /message?id=123456
 ```
 #### Response
 | Response Variable | Type | Description  |
@@ -211,19 +222,43 @@ GET /message?id=<message_id>
 ```
 POST /document
 {
-  messageId: 123456,
-  contentType: "image/png",
-  content: "...base 64 encoded..."
+  messageId : 123456,
+  contentType : "image/png",
+  content : "...base 64 encoded..."
 }
 ```
 #### Response
-
+| Response Variable | Type | Description  |
+| ------------- | ------------- | ------------ |
+| documentId | int | The GUID generated for the document |
+```
+{
+	documentId : "2345"
+}
+```
 ### Get a document
 #### Request
 ```
 GET /document?id=<document_id>
+
+GET /document?id=2345
 ```
 #### Response
-
+| Response Variable | Type | Description  |
+| ------------- | ------------- | ------------ |
+| documentName | String | The name of the document |
+| contentType | String | The MIME content type of the document |
+| content | TBD | The encoded resource, encoding method to be determined |
+| messageId | int | The messageId for the message the document is attached to |
+```
+{
+	documentName : "Grocery_List",
+	contentType : "text/html",
+	content : "...base 64 encoded..."
+	messageId : 123456
+}
+```
+## Bots
+### To be determined...
 
 
