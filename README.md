@@ -26,16 +26,37 @@ GET /auth?name=tim
 }
 ```
 ## User
+### Get all users
+To request a list of all existing users, send a GET request to /users with no parameters. This will return a JSON list of user's usernames as Strings
+#### Request
+```
+GET /users
+```
+#### Response
+| Response Variable       | Type          | Description  |
+| -------------   | ------------- | ------------ |
+| users | JSON Object | A list of usernames |
+```
+{
+	users : [
+		{ username : "Doug", userId : 1234, dateCreated :  1433453749290,  groups : [1, 12, 56]},
+		{ username : "Bill", userId : 1563, dateCreated :  1433453768090,  groups : [2, 22] },
+		{ username : "Tom", userId : 2333, dateCreated :  143345377790,  groups : [4, 30, 80, 99] },
+		{...}
+	]
+}
+```
+
 ### Get user info
-To request information regarding an existing user, send a GET request to /user with the parameter name set to your username. This request is responded by a unique int : userId, long : dateCreated, int[] : groups. 
+To request information regarding an existing user, send a GET request to /users with the parameter name set to your username. This request is responded by a unique int : userId, long : dateCreated, int[] : groups. 
 #### Request
 | Request Parameter       | Type          | Description  |
 | -------------   | ------------- | ------------ |
 | userName            | String	  |  The User Name for the user you are fetching|
 ```
-GET /user?userName=<user_name>
+GET /users?userName=<user_name>
 
-GET /user?userName=david
+GET /users?userName=david
 ```
 #### Response
 | Response Parameter       | Type          | Description  |
@@ -51,15 +72,15 @@ GET /user?userName=david
 }
 ```
 ### Create a user
-To create a user, send a POST request to /user passing the parameter newUser. An int : userId and long : dateCreated will be returned. 
+To create a user, send a POST request to /users passing the parameter newUser. An int : userId and long : dateCreated will be returned. 
 #### Request
 | Request Parameter | Type | Description  |
 | ------------- | ------------- | ------------ |
 | newUser | String | Name of the user being created |
 ```
-POST /user?newUser=<new_user_name>
+POST /users?newUser=<new_user_name>
 
-POST /user?newUser=ted
+POST /users?newUser=ted
 ```
 #### Response
 | Response Variable | Type | Description  |
@@ -73,15 +94,36 @@ POST /user?newUser=ted
 }
 ```
 ## Group
+### Get all groups
+To request a list of all existing groups, send a GET request to /groups with no parameters.
+#### Request
+```
+GET /groups
+```
+#### Response
+| Response Parameter       | Type          | Description  |
+| -------------   | ------------- | ------------ |
+| groups | JSON Object | JSON Object that contains an array of group information |
+```
+{
+	groups : [
+		{ groudId : 56, groupName : "Android Chatroom", owner : "Doug", userIds : [1234, 1345], messageIds : [123456, 234567, ...], dateCreated : 1433453749290 },
+		{ groudId : 45, groupName : "iOS Chatroom", owner : "Ted", userIds : [1254, 1347], messageIds : [123486, 234569, ...], dateCreated : 1433453749890 },
+		{...}
+	]
+	
+}
+```
+
 ### Create a group
-To create a group, send a POST request to /group with a JSON object containing the String : owner and String : groupName.
+To create a group, send a POST request to /groups with a JSON object containing the String : owner and String : groupName.
 #### Request
 | Request Parameter | Type | Description  |
 | ------------- | ------------- | ------------ |
 | owner | String | The userName of the group creator |
 | groupName | String | The desired name of the group |
 ```
-POST /group
+POST /groups
 {
 	owner : “Doug”,
 	groupName : “Android Chatroom”
@@ -108,9 +150,9 @@ POST /group
 | ------------- | ------------- | ------------ |
 | groupName | String | Name of the group being fetched |
 ```
-GET /group?groupName=<group_name>
+GET /groups?groupName=<group_name>
 
-GET /group?groupName=Hangout
+GET /groups?groupName=Hangout
 ```
 #### Response
 | Response Variables | Type | Description  |
