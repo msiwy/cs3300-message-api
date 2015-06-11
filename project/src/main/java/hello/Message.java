@@ -11,6 +11,7 @@ public class Message {
     public long dateCreated;
     public String content;
     public int senderId;
+    public int documentId;
     public Message(String content, int senderId) {
         this.content = content;
         this.senderId = senderId;
@@ -18,5 +19,6 @@ public class Message {
         this.dateCreated = date.getTime();
         this.messageId = date.hashCode();
         this.messageId = 0;
+        this.documentId = 84783494;
     }
 }
