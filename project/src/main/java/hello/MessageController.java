@@ -32,10 +32,10 @@ public class MessageController {
     }
 
     @RequestMapping(method=RequestMethod.GET, value="/messages")
-    public Message getUser(@RequestParam("messageId") int messageId) {
+    public Message getMessage(@RequestParam("messageId") int messageId) {
         for (Message mess : messages) {
             if (mess.messageId == messageId) {
-                return message;
+                return mess;
             }
         }
         return null;
@@ -52,7 +52,7 @@ public class MessageController {
     public boolean deleteMessage(@RequestParam("messageId") int messageId) {
         for (Message mess : messages) {
             if (mess.messageId == messageId) {
-                return messages.remove(message);
+                return messages.remove(mess);
             }
         }
         return false;
