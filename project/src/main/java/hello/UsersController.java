@@ -3,11 +3,6 @@ package hello;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * Created by samford on 6/10/15.
@@ -21,9 +16,6 @@ public class UsersController {
         User user1 = new User("Bob");
         User user2 = new User("John");
         User user3 = new User("Sally");
-        user1.userId = 1;
-        user2.userId = 2;
-        user3.userId = 3;
         users.add(user1);
         users.add(user2);
         users.add(user3);
@@ -40,7 +32,7 @@ public class UsersController {
         return -1;
     }
 
-    @RequestMapping(value="/users/all")
+    @RequestMapping(value="/users")
     public List getUsers() {
         return users;
     }
@@ -50,9 +42,6 @@ public class UsersController {
         for (User user : users) {
             if (user.userId == userId) {
                 return user;
-            }
-            else if (user.userId == 0){
-                return new User("hi");
             }
         }
         return null;
