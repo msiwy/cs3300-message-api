@@ -233,7 +233,20 @@ Failure
 	}
 }
 ```
-
+## Notifications
+### Get a user's notifications
+The client should periodically send GET requests to  /notifications/{userId} to retrieve notifications on messages sent to that user.
+#### Request
+```
+GET /notifications/{userId}
+```
+#### Response
+```
+[
+	{ "messageId": 100, "senderId" : 1234, "dateCreated" : 34623754762354, "content" : "Hey Doug", },
+	{ "messageId": 101, "senderId" : 1235, "dateCreated" : 34623754762378, "content" : "Hey Ted, thanks for the text",  }
+]
+```
 
 ## Document TO BE DETERMINED
 ### Send a document
