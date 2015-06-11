@@ -15,6 +15,8 @@ To authenticate a user, send a GET request to /auth with the parameter name set 
 GET /auth?username=<user_name>
 
 GET /auth?username=tim
+
+GET /auth?username="Tim"
 ```
 #### Response
 | Response Variable        | Type          | Description  |
@@ -22,7 +24,7 @@ GET /auth?username=tim
 | userId          | int	          | The GUID generated. Returns -1 on fail  |
 ```
 {
-	userId : 1234		// -1 if user does not exist
+	"userId" : 1234		// -1 if user does not exist
 }
 ```
 ## Users
@@ -39,9 +41,9 @@ GET /users/all
 | userId | int | A user's GUID |
 ```
 [
-	{ username : "Doug", userId : 123674 },
-	{ username : "Bill", userId : 61563 },
-	{ username : "Tom", userId : 25333 },
+	{ "username" : "Doug", "userId" : 123674 },
+	{ "username" : "Bill", "userId" : 61563 },
+	{ "username" : "Tom", "userId" : 25333 },
 	{...}
 ]
 
@@ -78,6 +80,8 @@ To create a user, send a POST request to /users passing the parameter newUser. T
 POST /users?newUser=<new_user_name>
 
 POST /users?newUser=Ted
+
+POST /users?newUser="Ted"
 ```
 #### Response
 | Response Variable | Type | Description  |
@@ -87,7 +91,7 @@ POST /users?newUser=Ted
 ```
 {
 	"username" : "Ted", 
-	userId : 2345546
+	"userId" : 2345546
 }
 ```
 ## Group
@@ -141,8 +145,8 @@ GET /groups/{groupId}/users
 #### Response
 ```
 [
-	{userId : 1234, username : "Ted"},
-	{userId : 1235, username : "Bill"},
+	{"userId" : 1234, "username" : "Ted"},
+	{"userId" : 1235, "username" : "Bill"},
 	{...}
 ]
 ```
@@ -154,8 +158,8 @@ GET /groups/{groupId}/messages
 #### Response
 ```
 [
-	{ messageId: 100, senderId : 1234, dateCreated : 34623754762354, content : "Hey Doug", },
-	{ messageId: 101, senderId : 1235, dateCreated : 34623754762378, content : "Hey Ted, thanks for the text",  }
+	{ "messageId": 100, "senderId" : 1234, "dateCreated" : 34623754762354, "content" : "Hey Doug", },
+	{ "messageId": 101, "senderId" : 1235, "dateCreated" : 34623754762378, "content" : "Hey Ted, thanks for the text",  }
 ]
 ```
 
@@ -193,9 +197,9 @@ To send a message, send a POST request to /message as a JSON object containing t
 ```
 POST /messages
 {	
-	senderId : 1234, // this is the current user's userId
-	recipientIds : [2345, 1233, 1222]
-	content : "Hey guys"
+	"senderId" : 1234, // this is the current user's userId
+	"recipientIds" : [2345, 1233, 1222]
+	"content" : "Hey guys"
 }
 
 ```
@@ -208,9 +212,9 @@ POST /messages
 ```
 Success
 {
-	success : true,
-	messageId : 100,
-	groupId: : 44 // We determine if a new group is created or if it already exists
+	"success" : true,
+	"messageId" : 100,
+	"groupId": : 44 // We determine if a new group is created or if it already exists
 }
 ```
 | Response Variables | Type | Description  |
@@ -222,10 +226,10 @@ Success
 ```
 Failure
 {
-	success : false
-	error : {
-		code : “1”,	// List of error codes will be created
-		description : “User ‘George P. Burdell’ does not exist” 
+	"success" : false
+	"error" : {
+		"code" : “1”,	// List of error codes will be created
+		"description" : “User ‘George P. Burdell’ does not exist” 
 	}
 }
 ```
