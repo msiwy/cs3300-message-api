@@ -5,7 +5,7 @@ package hello;
  */
 public class User {
     public String username;
-    public int userId
+    public int userId;
     public User(String username) {
         this.username = username;
         this.userId = username.hashCode();
