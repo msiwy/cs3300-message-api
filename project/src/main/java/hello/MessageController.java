@@ -2,21 +2,25 @@ package hello;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicLong;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * Created by samford on 6/10/15.
  */
+@RestController
 public class MessageController {
 
     List<Message> messages = new ArrayList<Message>();
 
     public MessageController() {
-        Message m1 = new Message("Hello 1!", 1);
-        Message m2 = new Message("Hello 2!", 1);
-        Message m3 = new Message("Hello 3!", 2);
+        Message m1 = new Message("Hello1", 1);
+        Message m2 = new Message("Hello2", 2);
+        Message m3 = new Message("Hello3", 3);
         m1.messageId = 1;
         m2.messageId = 2;
         m3.messageId = 3;

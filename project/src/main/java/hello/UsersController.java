@@ -3,6 +3,11 @@ package hello;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * Created by samford on 6/10/15.
@@ -32,7 +37,7 @@ public class UsersController {
         return -1;
     }
 
-    @RequestMapping(value="/users")
+    @RequestMapping(value="/users/all")
     public List getUsers() {
         return users;
     }
