@@ -6,15 +6,15 @@ Web Server / REST API
 # Specifications
 ## Authentication 
 ### Authenticate a user
-To authenticate a user, send a GET request to /auth with the parameter name set to your username. This request is responded by a unique int : userId. -1 is returned if the authentication fails, for example if parameter name is an empty String
+To authenticate a user, send a GET request to /auth with the parameter name set to your username. This request is responded by a unique int : userId. -1 is returned if the username does not exist
 #### Request
 | Request Parameter       | Type          | Description  |
 | -------------   | ------------- | ------------ |
-| name            | String	| User name being authenticated. |
+| username            | String	| Username being authenticated. |
 ```
-GET /auth?name=<user_name>
+GET /auth?username=<user_name>
 
-GET /auth?name=tim
+GET /auth?username=tim
 ```
 #### Response
 | Response Variable        | Type          | Description  |
@@ -22,57 +22,54 @@ GET /auth?name=tim
 | userId          | int	          | The GUID generated. Returns -1 on fail  |
 ```
 {
-	userId : 1234		// -1 for failure
+	userId : 1234		// -1 if user does not exist
 }
 ```
-## User
+## Users
 ### Get all users
 To request a list of all existing users, send a GET request to /users with no parameters. This will return a JSON list of user's usernames as Strings
 #### Request
 ```
-GET /users
+GET /users/all
 ```
 #### Response
 | Response Variable       | Type          | Description  |
 | -------------   | ------------- | ------------ |
-| users | JSON Object | A list of usernames |
+| username | String | A user's name |
+| userId | int | A user's GUID |
 ```
-{
-	users : [
-		{ username : "Doug", userId : 1234, dateCreated :  1433453749290,  groups : [1, 12, 56]},
-		{ username : "Bill", userId : 1563, dateCreated :  1433453768090,  groups : [2, 22] },
-		{ username : "Tom", userId : 2333, dateCreated :  143345377790,  groups : [4, 30, 80, 99] },
-		{...}
-	]
-}
+[
+	{ username : "Doug", userId : 123674 },
+	{ username : "Bill", userId : 61563 },
+	{ username : "Tom", userId : 25333 },
+	{...}
+]
+
 ```
 
 ### Get user info
-To request information regarding an existing user, send a GET request to /users with the parameter name set to your username. This request is responded by a unique int : userId, long : dateCreated, int[] : groups. 
+To request information regarding an existing user, send a GET request to /users with the parameter userId.
 #### Request
 | Request Parameter       | Type          | Description  |
 | -------------   | ------------- | ------------ |
-| userName            | String	  |  The User Name for the user you are fetching|
+| userId            | String	  |  The GUID for the user |
 ```
-GET /users?userName=<user_name>
+GET /users?userId=<user_id>
 
-GET /users?userName=david
+GET /users?userId=66965
 ```
 #### Response
 | Response Parameter       | Type          | Description  |
 | -------------   | ------------- | ------------ |
+| username | String | The username of the user in interest |
 | userId            | int	  | The GUID for the user |
-| dateCreated | long | The date the user was created in milliseconds |
-| groups | int[] | An array of groupId's the user belongs to |
 ```
 {
-	userId : 1234,
-	dateCreated :  1433453749290,	// In milliseconds
-	groups : [1, 12, 56],		// Group IDs	
+	"username":"Bob", "userId":66965
 }
 ```
 ### Create a user
-To create a user, send a POST request to /users passing the parameter newUser. An int : userId and long : dateCreated will be returned. 
+To create a user, send a POST request to /users passing the parameter newUser. The username and userId will be returned. 
 #### Request
 | Request Parameter | Type | Description  |
 | ------------- | ------------- | ------------ |
@@ -80,115 +77,125 @@ To create a user, send a POST request to /users passing the parameter newUser. A
 ```
 POST /users?newUser=<new_user_name>
 
-POST /users?newUser=ted
+POST /users?newUser=Ted
 ```
 #### Response
 | Response Variable | Type | Description  |
 | ------------- | ------------- | ------------ |
 | userId | int | The GUID of the user |
-| dateCreated | long | The date the user was created in milliseconds |
+| username | String | The name of the user |
 ```
 {
-	userId : 2345,
-	dateCreated : 1433453749290	// In milliseconds
+	"username" : "Ted", 
+	userId : 2345546
 }
 ```
 ## Group
 ### Get all groups
-To request a list of all existing groups, send a GET request to /groups with no parameters.
+To request a list of all existing groups, send a GET request to /groups/all. Note that whenever a message is sent a group is created, so not all groups will have groupnames
 #### Request
 ```
-GET /groups
+GET /groups/all
 ```
 #### Response
 | Response Parameter       | Type          | Description  |
 | -------------   | ------------- | ------------ |
-| groups | JSON Object | JSON Object that contains an array of group information |
-```
-{
-	groups : [
-		{ groudId : 56, groupName : "Android Chatroom", owner : "Doug", userIds : [1234, 1345], messageIds : [123456, 234567, ...], dateCreated : 1433453749290 },
-		{ groudId : 45, groupName : "iOS Chatroom", owner : "Ted", userIds : [1254, 1347], messageIds : [123486, 234569, ...], dateCreated : 1433453749890 },
-		{...}
-	]
-	
-}
-```
+| groupname | String | Name of the group |
+| groupId | int | The group's GUID |
 
-### Create a group
-To create a group, send a POST request to /groups with a JSON object containing the String : owner and String : groupName.
-#### Request
-| Request Parameter | Type | Description  |
-| ------------- | ------------- | ------------ |
-| owner | String | The userName of the group creator |
-| groupName | String | The desired name of the group |
 ```
-POST /groups
-{
-	owner : “Doug”,
-	groupName : “Android Chatroom”
-}
-```
-#### Response
-| Response Variable | Type | Description  |
-| ------------- | ------------- | ------------ |
-| success | boolean | Returns true if the group was created |
-| groupId | int | Generated GUID for the group | 
-| owner | String | The owner of the group |
-| userIds | int[] | An array containing the GUIDs for all users in the group, this will initially only have the owner's userId |
-```
-{
-	success : true,
-	groupId : 56,
-	owner : "Doug",
-	userIds : 1234		// The owner's userId
-}
+[
+	{ "groupname" : "Klaus", "groupId" : 1 },
+	{ "groupname" : "SW", "groupId" : 2 },
+	{ "groupId" : 3 }
+]
+	
 ```
 ### Get a group's info
 #### Request
 | Request Parameter | Type | Description  |
 | ------------- | ------------- | ------------ |
-| groupName | String | Name of the group being fetched |
+| groupId | String | Name of the group being fetched |
 ```
-GET /groups?groupName=<group_name>
+GET /groups?groupId=<group_id>
 
-GET /groups?groupName=Hangout
+GET /groups?groupId=1
 ```
 #### Response
 | Response Variables | Type | Description  |
 | ------------- | ------------- | ------------ |
-| groupId | int | The GUID of the group being fetched. -1 is returned if it does not exist   |
+| groupId | int | The GUID of the group being fetched. -1 is returned if it does not exist |
 | groupName | String | The name of the group |
-| userIds | int[] | An array containing the GUIDs for all users in the group |
-| messageIds | int[] | An array containing the GUIDs for all messages in the group |
-| dateCreated | long | The date the user was created in milliseconds |
-| owner | String | The username of the user that created the group |
 
 ```
 {
-	groupId : 56,
-	groupName : “Android Chatroom”,
-	userIds : [1234, 1236, 2314, … ],
-	messageIds : [123456, 546789, …. ],
-	dateCreated : 1433453749290,
-	owner : “Doug”
+	"groupname":"Klaus", 
+	"groupId":1
 }
 ```
-## Message
-### Send a message
-To send a message, send a POST request to /message as a JSON object containing the parameters: String : from (username), String : to (user or chatroom name), and String : content. A successful request will be responded with boolean : success (true), an int : messageId, an int : groupId and a long : dateCreated. An unsuccessful request will be responded with a boolean : success (false) and an error object with a code and description of the error. 
+### Get all users in a group
+#### Request
+```
+GET /groups/{groupId}/users
+```
+#### Response
+```
+[
+	{userId : 1234, username : "Ted"},
+	{userId : 1235, username : "Bill"},
+	{...}
+]
+```
+### Get all users in a group
+#### Request
+```
+GET /groups/{groupId}/messages
+```
+#### Response
+```
+[
+	{ messageId: 100, senderId : 1234, dateCreated : 34623754762354, content : "Hey Doug", },
+	{ messageId: 101, senderId : 1235, dateCreated : 34623754762378, content : "Hey Ted, thanks for the text",  }
+]
+```
+
+### Create a group
+To create a group, send a POST request to /groups with the parameter groupname
 #### Request
 | Request Parameter | Type | Description  |
 | ------------- | ------------- | ------------ |
-| sender | String | The userName of the user sending the message  |
-| recipient | String | The userName/groupName of the user/group receiving  the message |
+| groupName | String | The desired name of the group |
+```
+POST /groups?groupname="Chatroom"
+
+```
+#### Response
+| Response Variable | Type | Description  |
+| ------------- | ------------- | ------------ |
+| groupName | String | The desired name of the group |
+| groupId | int | The GUID for the group |
+```
+{
+	"groupname":"Chatroom",
+	"groupId":1502940243
+}
+```
+
+## Messages
+### Send a message
+To send a message, send a POST request to /message as a JSON object containing the parameters: senderId, recipientIds, and content.
+#### Request
+| Request Parameter | Type | Description  |
+| ------------- | ------------- | ------------ |
+| senderId | int | The userId of the user sending the message  |
+| recipientIds | int[] | The userIds of the users receiving the message |
 | content | String | The contents of the message being sent |
 ```
-POST /message
-{
- 	sender: “Doug”,
-	recipient: “John”,		// Chatroom names can also be passed 
-	content: "Hey"
+POST /messages
+{	
+	senderId : 1234, // this is the current user's userId
+	recipientIds : [2345, 1233, 1222]
+	content : "Hey guys"
 }
 
 ```
@@ -198,14 +205,12 @@ POST /message
 | success | boolean | Returns true if the message was delivered  |
 | messageId | int | The generated GUID for the message |
 | groupId | int | The GUID of the group the message belongs to |
-| dateCreated | long | The date the message was created in milliseconds |
 ```
 Success
 {
 	success : true,
-	messageId : 345224,
-	groupId : 56,		// A message to only 1 user will still have a groupId
-	dateCreated : 1433453749290	// In milliseconds
+	messageId : 100,
+	groupId: : 44 // We determine if a new group is created or if it already exists
 }
 ```
 | Response Variables | Type | Description  |
@@ -225,35 +230,8 @@ Failure
 }
 ```
 
-### Get a message
-#### Request
-| Request Parameter | Type | Description  |
-| ------------- | ------------- | ------------ |
-| id | String | The messageId for the message being fetched |
-```
-GET /message?id=<message_id>
 
-GET /message?id=123456
-```
-#### Response
-| Response Variable | Type | Description  |
-| ------------- | ------------- | ------------ |
-| sender | String | The userName of the sender |
-| recipient | String | The userName of the recipient |
-| content | String | The contents of the message |
-| dateCreated | long | The date the message was created in milliseconds |
-| documentId | int | (Optional) The GUID of the document attached to the message |
-```
-{
-	sender : "Doug",
-	recipient : "Bill",
-	content : "Hey Bill, I send messages",
-	dateCreated : 1433453749290,
-	documentId : 234
-}
-```
-
-## Document
+## Document TO BE DETERMINED
 ### Send a document
 #### Request
 | Request Parameter | Type | Description  |
