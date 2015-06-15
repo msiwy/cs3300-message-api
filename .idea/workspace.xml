@@ -6,47 +6,8 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bc4c0721-8bcd-4f12-a8b4-6b9d0e61beab" name="Default" comment="Jesse's commit : Created all useful classes">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/src/main/java/hello/DatabaseConnection.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/src/main/java/hello/GroupParticipant.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Spring_Web_Services_2_0_2.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_12.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_core_8_0_15.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_el_8_0_15.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_logging_juli_8_0_15.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_websocket_8_0_15.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_library_1_3.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mockito_mockito_core_1_10_8.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_objenesis_objenesis_2_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_test_1_2_1_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_tomcat_1_2_1_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_test_4_1_4_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/project/target/classes/hello/Application.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/project/target/classes/hello/Error.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/project/target/classes/hello/Greeting.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/project/target/classes/hello/GreetingController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/project/target/classes/hello/Group.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/project/target/classes/hello/GroupController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/project/target/classes/hello/Message.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/project/target/classes/hello/MessageController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/project/target/classes/hello/ServletInitializer.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/project/target/classes/hello/User.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/project/target/classes/hello/UsersController.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/src/main/java/hello/Application.java" afterPath="$PROJECT_DIR$/project/src/main/java/hello/Application.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/src/main/java/hello/Error.java" afterPath="$PROJECT_DIR$/project/src/main/java/hello/Error.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/src/main/java/hello/Greeting.java" afterPath="$PROJECT_DIR$/project/src/main/java/hello/Greeting.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/src/main/java/hello/GreetingController.java" afterPath="$PROJECT_DIR$/project/src/main/java/hello/GreetingController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/src/main/java/hello/Group.java" afterPath="$PROJECT_DIR$/project/src/main/java/hello/Group.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/src/main/java/hello/GroupController.java" afterPath="$PROJECT_DIR$/project/src/main/java/hello/GroupController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/src/main/java/hello/Message.java" afterPath="$PROJECT_DIR$/project/src/main/java/hello/Message.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/src/main/java/hello/MessageController.java" afterPath="$PROJECT_DIR$/project/src/main/java/hello/MessageController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/src/main/java/hello/ServletInitializer.java" afterPath="$PROJECT_DIR$/project/src/main/java/hello/ServletInitializer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/src/main/java/hello/User.java" afterPath="$PROJECT_DIR$/project/src/main/java/hello/User.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/src/main/java/hello/UsersController.java" afterPath="$PROJECT_DIR$/project/src/main/java/hello/UsersController.java" />
+    <list default="true" id="bc4c0721-8bcd-4f12-a8b4-6b9d0e61beab" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="$PROJECT_DIR$/project/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/p1server.iml" afterPath="$PROJECT_DIR$/.idea/p1server.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="gs-rest-service.iws" />
@@ -732,7 +693,7 @@
       <workItem from="1434039072772" duration="1788000" />
       <workItem from="1434318167609" duration="3896000" />
       <workItem from="1434324669058" duration="595000" />
-      <workItem from="1434325342479" duration="4700000" />
+      <workItem from="1434325342479" duration="4727000" />
     </task>
     <task id="LOCAL-00001" summary="Jesse's commit.">
       <created>1433439675243</created>
@@ -770,11 +731,17 @@
       <option name="project" value="LOCAL" />
       <updated>1433989058523</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Jesse's commit : Created all useful classes">
+      <created>1434331745905</created>
+      <option name="number" value="00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1434331745905</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29044000" />
+    <option name="totallyTimeSpent" value="29071000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="136" y="23" width="1268" height="800" extended-state="0" />
@@ -792,6 +759,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32968536" sideWeight="0.51498425" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19151847" sideWeight="0.47634068" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32968536" sideWeight="0.49699053" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -804,7 +772,6 @@
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32968536" sideWeight="0.49699053" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3994528" sideWeight="0.49706745" order="5" side_tool="false" content_ui="tabs" />
