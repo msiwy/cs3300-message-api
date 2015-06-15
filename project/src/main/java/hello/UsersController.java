@@ -1,4 +1,4 @@
-package hello;
+package main.java.hello;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,7 +27,7 @@ public class UsersController {
 
     }
 
-    @RequestMapping("/auth")
+    @RequestMapping(value="/auth")
     public int auth(@RequestParam("username") String username) {
         for (User user : users) {
             if (user.username.equals(username)) {

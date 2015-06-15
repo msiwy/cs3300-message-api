@@ -1,18 +1,17 @@
-package hello;
+package main.java.hello;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMethod;
+
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by Gatsby on 6/10/15.
  */
 @RestController
+@RequestMapping("/groups")
 public class GroupController {
 
     List<Group> groups = new ArrayList<Group>();
@@ -30,13 +29,13 @@ public class GroupController {
 
     }
 
-    @RequestMapping(value="/groups/all")
-    public List getGroupss() {
+    @RequestMapping(value="/all")
+    public List getAllGroups() {
         return groups;
     }
 
-    @RequestMapping(method=RequestMethod.GET, value="/groups")
-    public Group getGroup(@RequestParam("groupId") int groupId) {
+    @RequestMapping(method=RequestMethod.GET, value="/{groupId}")
+    public Group getGroups(@PathVariable("groupId") int groupId) {
         for (Group group : groups) {
             if (group.groupId == groupId) {
                 return group;
@@ -45,14 +44,36 @@ public class GroupController {
         return null;
     }
 
-    @RequestMapping(method=RequestMethod.POST, value="/groups")
+    @RequestMapping(method=RequestMethod.GET, value="/{groupId}/users")
+    public Group getMembers(@PathVariable("groupId") int groupId) {
+        for (Group group : groups) {
+            if (group.groupId == groupId) {
+                return group;
+            }
+        }
+        return null;
+    }
+
+    @RequestMapping(method=RequestMethod.GET, value="/{groupId}/messages")
+    public Group getMessages(@PathVariable("groupId") int groupId) {
+        return null;
+    }
+
+
+    @RequestMapping(method=RequestMethod.POST, value="/create")
     public Group createGroup(@RequestParam("groupname") String groupname) {
         Group group = new Group(groupname);
         groups.add(group);
         return group;
     }
 
-    @RequestMapping(method=RequestMethod.DELETE, value="/groups")
+    @RequestMapping(method=RequestMethod.POST, value="/add")
+    public Group AddUser(@RequestParam("groupId") int groupId, @RequestParam("userId") int userId) {
+        GroupParticipant gp = new GroupParticipant(groupId,userId);
+        return null;
+    }
+
+    @RequestMapping(method=RequestMethod.DELETE)
     public boolean deleteGroups(@RequestParam("groupId") int groupId) {
         for (Group group : groups) {
             if (group.groupId == groupId) {

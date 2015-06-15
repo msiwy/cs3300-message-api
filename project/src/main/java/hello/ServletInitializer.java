@@ -1,4 +1,4 @@
-package hello;
+package main.java.hello;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.web.SpringBootServletInitializer;

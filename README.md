@@ -115,27 +115,24 @@ GET /groups/all
 ]
 	
 ```
-### Get a group's info
+### Get a group's info by groupId
+To request a list of all existing groups, send a GET request to /groups/all. Note that whenever a message is sent a group is created, so not all groups will have groupnames
 #### Request
-| Request Parameter | Type | Description  |
-| ------------- | ------------- | ------------ |
-| groupId | String | Name of the group being fetched |
 ```
-GET /groups?groupId=<group_id>
-
-GET /groups?groupId=1
+GET /groups/<groupId>
 ```
 #### Response
-| Response Variables | Type | Description  |
-| ------------- | ------------- | ------------ |
-| groupId | int | The GUID of the group being fetched. -1 is returned if it does not exist |
-| groupName | String | The name of the group |
+| Response Parameter       | Type          | Description  |
+| -------------   | ------------- | ------------ |
+| groupname | String | Name of the group |
+| groupId | int | The group's GUID |
 
 ```
 {
 	"groupname":"Klaus", 
 	"groupId":1
 }
+
 ```
 ### Get all users in a group
 #### Request
@@ -170,7 +167,7 @@ To create a group, send a POST request to /groups with the parameter groupname
 | ------------- | ------------- | ------------ |
 | groupName | String | The desired name of the group |
 ```
-POST /groups?groupname="Chatroom"
+POST /groups/create?groupname="Chatroom"
 
 ```
 #### Response
@@ -182,6 +179,37 @@ POST /groups?groupname="Chatroom"
 {
 	"groupname":"Chatroom",
 	"groupId":1502940243
+}
+```
+
+### Add a User to a group
+To add a user to a group, send a POST request to /groups with the parameter groupname
+#### Request
+| Request Parameter | Type | Description  |
+| ------------- | ------------- | ------------ |
+| groupId | int | The GUID for the group |
+| userId | int | The GUID for the user |
+```
+POST /groups/add?groupId=<groupId>&userId=<userId>
+
+```
+#### Response
+| Response Variable | Type | Description  |
+| ------------- | ------------- | ------------ |
+| groupName | String | The desired name of the group |
+| groupId | int | The GUID for the group |
+```
+Success
+{
+	"status" : true,
+	"groupId" : 100,
+	"userId" : 44
+	"log": "Added"  / ignore for now : "Already exist","No user"
+}
+Failure
+{
+	"status" : false
+	"log": s"Already exist","No user"
 }
 ```
 
