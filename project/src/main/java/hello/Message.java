@@ -8,9 +8,9 @@ import java.util.Date;
 public class Message {
 //    messageId: 100, dateCreated : 34623754762354, content : "Hey Doug", senderId : 1234
     public int messageId;
+    public int senderId;
     public long dateCreated;
     public String content;
-    public int senderId;
     public int documentId;
     public Message(String content, int senderId) {
         this.content = content;

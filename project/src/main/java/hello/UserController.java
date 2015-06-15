@@ -4,20 +4,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMethod;
+
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by samford on 6/10/15.
  */
 @RestController
-public class UsersController {
+public class UserController {
 
     List<User> users = new ArrayList<User>();
 
-    public UsersController() {
+    public UserController() {
         User user1 = new User("Bob");
         User user2 = new User("John");
         User user3 = new User("Sally");
@@ -42,8 +40,8 @@ public class UsersController {
         return users;
     }
 
-    @RequestMapping(method=RequestMethod.GET, value="/users")
-    public User getUser(@RequestParam("userId") int userId) {
+    @RequestMapping(method=RequestMethod.GET, value="/users/{userId}")
+    public User getUser(@PathVariable("userId") int userId) {
         for (User user : users) {
             if (user.userId == userId) {
                 return user;

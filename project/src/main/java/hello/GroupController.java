@@ -46,11 +46,6 @@ public class GroupController {
 
     @RequestMapping(method=RequestMethod.GET, value="/{groupId}/users")
     public Group getMembers(@PathVariable("groupId") int groupId) {
-        for (Group group : groups) {
-            if (group.groupId == groupId) {
-                return group;
-            }
-        }
         return null;
     }
 
@@ -67,10 +62,12 @@ public class GroupController {
         return group;
     }
 
+    private final AtomicLong counter = new AtomicLong();
+
     @RequestMapping(method=RequestMethod.POST, value="/add")
     public Group AddUser(@RequestParam("groupId") int groupId, @RequestParam("userId") int userId) {
-        GroupParticipant gp = new GroupParticipant(groupId,userId);
-        return null;
+        new GroupParticipant(counter.incrementAndGet(),groupId,userId);
+        return this.getGroups(groupId);
     }
 
     @RequestMapping(method=RequestMethod.DELETE)

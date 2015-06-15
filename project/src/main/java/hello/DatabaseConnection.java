@@ -18,9 +18,9 @@ public class DatabaseConnection {
                 port + "/" + dbName + "?user=" + userName + "&password=" + password;
                 */
 
-        String dbName = System.getProperty("mastercorp");  //mastercorp
-        String userName = System.getProperty("pikachu"); //pikachu
-        String password = System.getProperty("pikapass"); //pikapass
+        String dbName = System.getProperty("cs3300");  //mastercorp
+        String userName = System.getProperty("root"); //pikachu
+        String password = System.getProperty("pass"); //pikapass
         String hostname = System.getProperty("127.0.0.1");
         String port = System.getProperty("3306");
         String jdbcUrl = "jdbc:mysql://" + hostname + ":" +
@@ -49,6 +49,7 @@ public class DatabaseConnection {
 
             // Create a table and write two rows
             setupStatement = conn.createStatement();
+            /*
             String createTable = "CREATE TABLE Beanstalk (Resource char(50));";
             String insertRow1 = "INSERT INTO Beanstalk (Resource) VALUES ('EC2 Instance');";
             String insertRow2 = "INSERT INTO Beanstalk (Resource) VALUES ('RDS Instance');";
@@ -57,6 +58,7 @@ public class DatabaseConnection {
             setupStatement.addBatch(insertRow1);
             setupStatement.addBatch(insertRow2);
             setupStatement.executeBatch();
+            */
             setupStatement.close();
 
         } catch (SQLException ex) {
@@ -71,15 +73,15 @@ public class DatabaseConnection {
 
         try {
             conn = DriverManager.getConnection(jdbcUrl);
-
+            /*
             readStatement = conn.createStatement();
-            resultSet = readStatement.executeQuery("SELECT Resource FROM Beanstalk;");
+            resultSet = readStatement.executeQuery("");
 
             resultSet.first();
             results = resultSet.getString("Resource");
             resultSet.next();
             results += ", " + resultSet.getString("Resource");
-
+            */
             resultSet.close();
             readStatement.close();
             conn.close();

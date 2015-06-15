@@ -1,12 +1,13 @@
 main/java/hello/ServletInitializer.class
-main/java/hello/UsersController.class
-main/java/hello/MessageController.class
 main/java/hello/User.class
 main/java/hello/GroupController.class
 main/java/hello/Error.class
+main/java/hello/UserController.class
 main/java/hello/GreetingController.class
+main/java/hello/Application.class
+main/java/hello/Greeting.class
+main/java/hello/MessageController.class
+main/java/hello/DatabaseConnection.class
 main/java/hello/Message.class
 main/java/hello/GroupParticipant.class
-main/java/hello/Application.class
 main/java/hello/Group.class
-main/java/hello/Greeting.class

@@ -11,6 +11,7 @@ To authenticate a user, send a GET request to /auth with the parameter name set 
 | Request Parameter       | Type          | Description  |
 | -------------   | ------------- | ------------ |
 | username            | String	| Username being authenticated. |
+
 ```
 GET /auth?username=<user_name>
 
@@ -18,6 +19,7 @@ GET /auth?username=tim
 
 GET /auth?username="Tim"
 ```
+
 #### Response
 | Response Variable        | Type          | Description  |
 | -------------   | ------------- | ------------ |
@@ -46,20 +48,17 @@ GET /users/all
 	{ "username" : "Tom", "userId" : 25333 },
 	{...}
 ]
-
 ```
 
 ### Get user info
 To request information regarding an existing user, send a GET request to /users with the parameter userId.
 #### Request
-| Request Parameter       | Type          | Description  |
-| -------------   | ------------- | ------------ |
-| userId            | String	  |  The GUID for the user |
-```
-GET /users?userId=<user_id>
 
-GET /users?userId=66965
 ```
+GET /users/<user_id>
+GET /users/66965
+```
+
 #### Response
 | Response Parameter       | Type          | Description  |
 | -------------   | ------------- | ------------ |
@@ -67,9 +66,33 @@ GET /users?userId=66965
 | userId            | int	  | The GUID for the user |
 ```
 {
-	"username":"Bob", "userId":66965
+	"username":"Bob",
+	"userId":66965
 }
 ```
+### Get all groups that a user is in
+To request information regarding which groups a user is in, send a GET request to /users/<userId>/groups with the parameter userId.
+This will return a JSON list of groupnames and groupIds.
+#### Request
+```
+GET /users/<userId>/groups
+GET /users/66965/groups
+```
+
+#### Response
+| Response Parameter       | Type          | Description  |
+| -------------   | ------------- | ------------ |
+| groupId | int	  | The GUID for the user |
+| groupname | String | The username of the user in interest |
+
+```
+[
+   { "groupId":24328, "groupname":"Water Cooler" },
+   { "groupId":93243, "groupname":"CS 3251 Project" },
+   { ... }
+]
+```
+
 ### Create a user
 To create a user, send a POST request to /users passing the parameter newUser. The username and userId will be returned. 
 #### Request
@@ -78,21 +101,17 @@ To create a user, send a POST request to /users passing the parameter newUser. T
 | newUser | String | Name of the user being created |
 ```
 POST /users?newUser=<new_user_name>
-
 POST /users?newUser=Ted
-
 POST /users?newUser="Ted"
 ```
+
 #### Response
 | Response Variable | Type | Description  |
 | ------------- | ------------- | ------------ |
 | userId | int | The GUID of the user |
 | username | String | The name of the user |
 ```
-{
-	"username" : "Ted", 
-	"userId" : 2345546
-}
+	{ "username" : "Ted", "userId" : 2345546 }
 ```
 ## Group
 ### Get all groups
@@ -113,7 +132,6 @@ GET /groups/all
 	{ "groupname" : "SW", "groupId" : 2 },
 	{ "groupId" : 3 }
 ]
-	
 ```
 ### Get a group's info by groupId
 To request a list of all existing groups, send a GET request to /groups/all. Note that whenever a message is sent a group is created, so not all groups will have groupnames
@@ -128,11 +146,7 @@ GET /groups/<groupId>
 | groupId | int | The group's GUID |
 
 ```
-{
-	"groupname":"Klaus", 
-	"groupId":1
-}
-
+{ "groupname":"Klaus", "groupId":1 }
 ```
 ### Get all users in a group
 #### Request
@@ -147,7 +161,7 @@ GET /groups/{groupId}/users
 	{...}
 ]
 ```
-### Get all users in a group
+### Get all messages in a group
 #### Request
 ```
 GET /groups/{groupId}/messages
@@ -155,8 +169,9 @@ GET /groups/{groupId}/messages
 #### Response
 ```
 [
-	{ "messageId": 100, "senderId" : 1234, "dateCreated" : 34623754762354, "content" : "Hey Doug", },
-	{ "messageId": 101, "senderId" : 1235, "dateCreated" : 34623754762378, "content" : "Hey Ted, thanks for the text",  }
+	{ "messageId": 100, "senderId" : 1000, "dateCreated" : 34623754762354, "content" : "Hey Doug." },
+	{ "messageId": 101, "senderId" : 3295, "dateCreated" : 34623754762378, "content" : "Hey Ted, what is up." },
+	{ ... }
 ]
 ```
 
@@ -168,7 +183,6 @@ To create a group, send a POST request to /groups with the parameter groupname
 | groupName | String | The desired name of the group |
 ```
 POST /groups/create?groupname="Chatroom"
-
 ```
 #### Response
 | Response Variable | Type | Description  |
@@ -176,10 +190,7 @@ POST /groups/create?groupname="Chatroom"
 | groupName | String | The desired name of the group |
 | groupId | int | The GUID for the group |
 ```
-{
-	"groupname":"Chatroom",
-	"groupId":1502940243
-}
+{ "groupname":"Chatroom", "groupId":1502940243 }
 ```
 
 ### Add a User to a group
@@ -191,25 +202,21 @@ To add a user to a group, send a POST request to /groups with the parameter grou
 | userId | int | The GUID for the user |
 ```
 POST /groups/add?groupId=<groupId>&userId=<userId>
-
 ```
 #### Response
 | Response Variable | Type | Description  |
 | ------------- | ------------- | ------------ |
-| groupName | String | The desired name of the group |
-| groupId | int | The GUID for the group |
+| groupId | String | The desired name of the group |
+| participantIds | int[] | The GUID for the users |
 ```
 Success
 {
-	"status" : true,
 	"groupId" : 100,
-	"userId" : 44
-	"log": "Added"  / ignore for now : "Already exist","No user"
+	"participantId" : [1,2,3,4]
 }
 Failure
 {
-	"status" : false
-	"log": s"Already exist","No user"
+	-1
 }
 ```
 
@@ -229,7 +236,6 @@ POST /messages
 	"recipientIds" : [2345, 1233, 1222]
 	"content" : "Hey guys"
 }
-
 ```
 #### Response
 | Response Variables | Type | Description  |
@@ -315,6 +321,7 @@ GET /document?id=2345
 | contentType | String | The MIME content type of the document |
 | content | TBD | The encoded resource, encoding method to be determined |
 | messageId | int | The messageId for the message the document is attached to |
+
 ```
 {
 	documentName : "Grocery_List",
