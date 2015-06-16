@@ -62,8 +62,8 @@ GET /users/all
    ```
    
    #### Response
-   | Response Parameter       | Type          | Description  |
-   | -------------   | ------------- | ------------ |
+| Response Variable       | Type          | Description  |
+| -------------   | ------------- | ------------ |
    | username | String | The username of the user in interest |
    | userId            | int	  | The GUID for the user |
    ```
