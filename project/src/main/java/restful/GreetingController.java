@@ -1,4 +1,4 @@
-package main.java.hello;
+package main.java.restful;
 
 import java.util.concurrent.atomic.AtomicLong;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,18 +10,15 @@ public class GreetingController {
 
     @RequestMapping("/")
     public String home() {
-        return "home";
+        return "CS3300 TEAM-API";
     }
 
-    private static final String template = "Hello, %s!";
+    private static final String template = "This is an error page, %s";
     private final AtomicLong counter = new AtomicLong();
-
-    private static final String template1 = "This is an error page, %s";
-    private final AtomicLong counter1 = new AtomicLong();
 
     @RequestMapping("/error1")
     public Error error(@RequestParam(value="id", defaultValue="default") String name) {
-        return new Error(counter1.incrementAndGet(), String.format(template1, name));
+        return new Error(counter.incrementAndGet(), String.format(template, name));
     }
 
 

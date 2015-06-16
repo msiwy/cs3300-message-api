@@ -1,4 +1,4 @@
-package main.java.hello;
+package main.java.restful;
 
 import java.util.Date;
 

@@ -13,20 +13,22 @@ To authenticate a user, send a GET request to /auth with the parameter name set 
 | username            | String	| Username being authenticated. |
 
 ```
-GET /auth?username=<user_name>
+GET /users/auth?username=<user_name>
 
-GET /auth?username=tim
+GET /users/auth?username=tim
 
-GET /auth?username="Tim"
+GET /users/auth?username="Tim"
 ```
 
 #### Response
 | Response Variable        | Type          | Description  |
 | -------------   | ------------- | ------------ |
 | userId          | int	          | The GUID generated. Returns -1 on fail  |
+| username | String | A user's name. Returns null on fail|
 ```
 {
 	"userId" : 1234		// -1 if user does not exist
+	"username": Cruise // NULL if user does not exist
 }
 ```
 ## Users
@@ -51,25 +53,26 @@ GET /users/all
 ```
 
 ### Get user info
-To request information regarding an existing user, send a GET request to /users with the parameter userId.
-#### Request
-
-```
-GET /users/<user_id>
-GET /users/66965
-```
-
-#### Response
-| Response Parameter       | Type          | Description  |
-| -------------   | ------------- | ------------ |
-| username | String | The username of the user in interest |
-| userId            | int	  | The GUID for the user |
-```
-{
-	"username":"Bob",
-	"userId":66965
-}
-```
+   To request information regarding an existing user, send a GET request to /users with the parameter userId.
+   #### Request
+   
+   ```
+   GET /users/<user_id>
+   GET /users/66965
+   ```
+   
+   #### Response
+   | Response Parameter       | Type          | Description  |
+   | -------------   | ------------- | ------------ |
+   | username | String | The username of the user in interest |
+   | userId            | int	  | The GUID for the user |
+   ```
+   {
+   	"username":"Bob",
+   	"userId":66965
+   }
+   ```  
+   
 ### Get all groups that a user is in
 To request information regarding which groups a user is in, send a GET request to /users/<userId>/groups with the parameter userId.
 This will return a JSON list of groupnames and groupIds.
@@ -94,15 +97,15 @@ GET /users/66965/groups
 ```
 
 ### Create a user
-To create a user, send a POST request to /users passing the parameter newUser. The username and userId will be returned. 
+To create a user, send a POST request to /users passing the parameter username. The username and userId will be returned. 
 #### Request
 | Request Parameter | Type | Description  |
 | ------------- | ------------- | ------------ |
-| newUser | String | Name of the user being created |
+| username | String | Name of the user being created |
 ```
-POST /users?newUser=<new_user_name>
-POST /users?newUser=Ted
-POST /users?newUser="Ted"
+POST /users?username=<username>
+POST /users?username=Ted
+POST /users?username="Ted"
 ```
 
 #### Response
@@ -113,6 +116,48 @@ POST /users?newUser="Ted"
 ```
 	{ "username" : "Ted", "userId" : 2345546 }
 ```
+   
+### Update user info
+To update information of an existing user, send a POST request to /users/<userId>/update with the parameter username.
+#### Requests
+```
+POST /users/<user_id>/update?username=<username>
+POST /users/66965/update?username=Tom
+POST /users/66965/update?username="Tom"
+```
+#### Response
+| Response Parameter       | Type          | Description  |
+| -------------   | ------------- | ------------ |
+| userId            | int	  | The GUID for the user |
+| username | String | The username of the user in interest |
+```
+{
+	"userId":66965,
+	"username":"Bob"
+}
+``` 
+### Delete a user
+To delete a user, send a DELETE request to /users passing the parameter userId. The username and userId will be returned. 
+#### Request
+| Request Parameter | Type | Description  |
+| ------------- | ------------- | ------------ |
+| userId | int | Name of the user being deleted |
+```
+DELETE /users?userId=<userId>
+DELETE /users?userId=123
+```
+
+#### Response
+| Response Variable | Type | Description  |
+| ------------- | ------------- | ------------ |
+| status | boolean | Success/Fail Status of request |
+```
+Success
+	{ "status" : true }
+Fail
+    { "status" : false }
+```
+   
 ## Group
 ### Get all groups
 To request a list of all existing groups, send a GET request to /groups/all. Note that whenever a message is sent a group is created, so not all groups will have groupnames
@@ -123,14 +168,14 @@ GET /groups/all
 #### Response
 | Response Parameter       | Type          | Description  |
 | -------------   | ------------- | ------------ |
-| groupname | String | Name of the group |
 | groupId | int | The group's GUID |
+| groupname | String | Name of the group |
 
 ```
 [
 	{ "groupname" : "Klaus", "groupId" : 1 },
 	{ "groupname" : "SW", "groupId" : 2 },
-	{ "groupId" : 3 }
+	{ "groupname" : "Default", "groupId" : 3 } // Default will be String of group member's userIds
 ]
 ```
 ### Get a group's info by groupId

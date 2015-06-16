@@ -1,4 +1,4 @@
-package main.java.hello;
+package main.java.restful;
 
 /**
  * Created by gatsby on 6/14/15.

@@ -1,13 +1,11 @@
-package main.java.hello;
+package main.java.restful;
 
-/**
- * Created by gatsby on 6/4/15.
- */
-public class Error {
+public class Greeting {
+
     private final long id;
     private final String content;
 
-    public Error(long id, String content) {
+    public Greeting(long id, String content) {
         this.id = id;
         this.content = content;
     }
