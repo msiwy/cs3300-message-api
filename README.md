@@ -3,6 +3,9 @@ p1server
 
 Web Server / REST API
 
+## End Point: http://cs3300.elasticbeanstalk.com
+
+
 # Specifications
 ## Authentication 
 ### Authenticate a user
