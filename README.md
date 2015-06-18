@@ -275,15 +275,11 @@ To send a message, send a POST request to /message as a JSON object containing t
 | Request Parameter | Type | Description  |
 | ------------- | ------------- | ------------ |
 | senderId | int | The userId of the user sending the message  |
-| recipientIds | int[] | The userIds of the users receiving the message |
+| groupId | int | The groupId the message |
 | content | String | The contents of the message being sent |
 ```
-POST /messages
-{	
-	"senderId" : 1234, // this is the current user's userId
-	"recipientIds" : [2345, 1233, 1222]
-	"content" : "Hey guys"
-}
+POST /messages?senderId=<senderId>&groupId=<groupId>&content=<content>
+POST /messages?senderId=123&groupId=456&content="Hello"
 ```
 #### Response
 | Response Variables | Type | Description  |
@@ -292,27 +288,14 @@ POST /messages
 | messageId | int | The generated GUID for the message |
 | groupId | int | The GUID of the group the message belongs to |
 ```
-Success
+Message
 {
-	"success" : true,
-	"messageId" : 100,
-	"groupId": : 44 // We determine if a new group is created or if it already exists
-}
-```
-| Response Variables | Type | Description  |
-| ------------- | ------------- | ------------ |
-| success | boolean | Returns false if the message was not delivered  |
-| error | Object | JSON Object containing an error code and description |
-| code | int | An error code that is paired with a description of the error |
-| description | String | A description as to why the message was not delivered |
-```
-Failure
-{
-	"success" : false
-	"error" : {
-		"code" : “1”,	// List of error codes will be created
-		"description" : “User ‘George P. Burdell’ does not exist” 
-	}
+	"messageId": 19
+	"senderId": 123
+	"dateCreated":"2015-01-15 01:00:03"
+	"content": "Woof"
+	"groupId": 12
+	"documentId": 112
 }
 ```
 ## Notifications

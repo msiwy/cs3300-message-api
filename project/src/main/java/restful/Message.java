@@ -29,7 +29,7 @@ public class Message {
     }
 
     public int getSenderId() {
-        return this.messageId;
+        return this.senderId;
     }
 
     public Timestamp getDateCreated() {
