@@ -1,4 +1,4 @@
-package main.java.restful;
+package restful;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,8 +31,7 @@ public class UserController {
 
     @RequestMapping(value="/all")
     public List<User> getAllUsers() {
-        List<User> users = new ArrayList<User>();
-        users = this.userJDBCTemplate.getAllUsers();
+        List<User> users = this.userJDBCTemplate.getAllUsers();
         return users;
     }
 

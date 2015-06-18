@@ -1,4 +1,4 @@
-package main.java.restful;
+package restful;
 
 import org.springframework.jdbc.core.RowMapper;
 

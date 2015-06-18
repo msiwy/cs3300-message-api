@@ -1,4 +1,4 @@
-package main.java.restful;
+package restful;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -39,7 +39,7 @@ public class MessageJDBCTemplate {
         return message;
     }
 
-    public List<Message> getMessageByMessage(String messageId) { // return in order by time
+    public List<Message> getMessageByMessageId(String messageId) { // return in order by time
         String query = "SELECT * FROM Message WHERE messageId = %d";
         String SQL = String.format(query,messageId);
         List<Map<String,Object>> rows = jdbcTemplateObject.queryForList(SQL);
@@ -53,7 +53,7 @@ public class MessageJDBCTemplate {
     }
 
     public List<Message> getAllMessages() {
-        String SQL = "SELECT * FROM Messages";
+        String SQL = "SELECT * FROM Message";
         List<Map<String,Object>> rows = jdbcTemplateObject.queryForList(SQL);
         List<Message> messages = new ArrayList<>();
         for (Map row : rows) {

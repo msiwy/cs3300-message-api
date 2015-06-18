@@ -1,4 +1,4 @@
-package main.java.restful;
+package restful;
 
 import java.util.ArrayList;
 import java.util.List;

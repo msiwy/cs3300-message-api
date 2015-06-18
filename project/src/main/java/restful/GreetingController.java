@@ -1,4 +1,4 @@
-package main.java.restful;
+package restful;
 
 import java.util.concurrent.atomic.AtomicLong;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,11 +15,6 @@ public class GreetingController {
 
     private static final String template = "This is an error page, %s";
     private final AtomicLong counter = new AtomicLong();
-
-    @RequestMapping("/error1")
-    public Error error(@RequestParam(value="id", defaultValue="default") String name) {
-        return new Error(counter.incrementAndGet(), String.format(template, name));
-    }
 
 
 }

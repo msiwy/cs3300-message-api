@@ -1,4 +1,4 @@
-package main.java.restful;
+package restful;
 
 /**
  * Created by samford on 6/10/15.

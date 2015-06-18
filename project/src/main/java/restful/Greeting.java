@@ -1,4 +1,4 @@
-package main.java.restful;
+package restful;
 
 public class Greeting {
 

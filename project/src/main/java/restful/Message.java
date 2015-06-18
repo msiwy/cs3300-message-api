@@ -1,4 +1,4 @@
-package main.java.restful;
+package restful;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -29,11 +29,8 @@ public class Message {
     }
 
     public int getSenderId() {
-<<<<<<< Updated upstream
         return this.senderId;
-=======
-        return this.messageId;
->>>>>>> Stashed changes
+
     }
 
     public Timestamp getDateCreated() {
