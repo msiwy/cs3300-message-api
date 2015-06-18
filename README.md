@@ -56,25 +56,25 @@ GET /users/all
 ```
 
 ### Get user info
-   To request information regarding an existing user, send a GET request to /users with the parameter userId.
-   #### Request
+To request information regarding an existing user, send a GET request to /users with the parameter userId.
+#### Request
    
-   ```
-   GET /users/<user_id>
-   GET /users/66965
-   ```
+```
+GET /users/<user_id>
+GET /users/66965
+```
    
-   #### Response
+#### Response
 | Response Variable       | Type          | Description  |
 | -------------   | ------------- | ------------ |
-   | username | String | The username of the user in interest |
-   | userId            | int	  | The GUID for the user |
-   ```
-   {
-   	"username":"Bob",
-   	"userId":66965
-   }
-   ```  
+| username | String | The username of the user in interest |
+| userId   |  int | The GUID for the user |
+```
+{
+   "username":"Bob",
+   "userId":66965
+}
+```  
    
 ### Get all groups that a user is in
 To request information regarding which groups a user is in, send a GET request to /users/<userId>/groups with the parameter userId.
