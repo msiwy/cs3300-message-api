@@ -16,7 +16,7 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/project/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/project/src/main/java" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/Deliverables" />
       <excludeFolder url="file://$MODULE_DIR$/project/target" />
     </content>
