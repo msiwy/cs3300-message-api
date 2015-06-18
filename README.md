@@ -259,8 +259,7 @@ POST /groups/add?groupId=<groupId>&userId=<userId>
 ```
 Success
 {
-	"groupId" : 100,
-	"groupName" : "Team9"
+	"groupId" : 100
 }
 Failure
 {
