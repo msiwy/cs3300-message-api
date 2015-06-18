@@ -323,6 +323,7 @@ GET /notifications/{userId}
 ```
 POST /document
 {
+  documentName = "Cat"
   messageId : 123456,
   contentType : "image/png",
   content : "...base 64 encoded..."
