@@ -4,10 +4,10 @@ package main.java.restful;
  * Created by Gatsby on 6/10/15.
  */
 public class Group {
-    public String groupname;
     public int groupId;
-    public Group(String groupname) {
+    public String groupname;
+    public Group(int groupId,String groupname) {
+        this.groupId = groupId;
         this.groupname = groupname;
-        this.groupId = groupname.hashCode();
     }
 }

@@ -30,7 +30,7 @@ public class UserController {
     }
 
     @RequestMapping(value="/all")
-    public List<User> getUsers() {
+    public List<User> getAllUsers() {
         List<User> users = new ArrayList<User>();
         users = this.userJDBCTemplate.getAllUsers();
         return users;

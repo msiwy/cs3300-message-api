@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -13,34 +15,26 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/groups")
 public class GroupController {
 
-    List<Group> groups = new ArrayList<Group>();
+    private GroupJDBCTemplate groupJDBCTemplate;
 
     public GroupController() {
-        Group group1 = new Group("Klaus");
-        Group group2 = new Group("SW");
-        Group group3 = new Group("HW");
-        group1.groupId = 1;
-        group2.groupId = 2;
-        group3.groupId = 3;
-        groups.add(group1);
-        groups.add(group2);
-        groups.add(group3);
-
+        ApplicationContext context =
+                new ClassPathXmlApplicationContext("bean.xml");
+        this.groupJDBCTemplate =
+                (GroupJDBCTemplate)context.getBean("groupJDBCTemplate");
     }
 
-    @RequestMapping(value="/all")
-    public List getAllGroups() {
+    @RequestMapping(method=RequestMethod.GET, value="/all")
+    public List<Group> getAllGroups() {
+        List<Group> groups = new ArrayList<Group>();
+        groups = this.groupJDBCTemplate.getAllGroups();
         return groups;
     }
 
     @RequestMapping(method=RequestMethod.GET, value="/{groupId}")
-    public Group getGroups(@PathVariable("groupId") int groupId) {
-        for (Group group : groups) {
-            if (group.groupId == groupId) {
-                return group;
-            }
-        }
-        return null;
+    public Group getGroup(@PathVariable("groupId") int groupId) {
+        Group group = this.groupJDBCTemplate.getGroup(groupId);
+        return group;
     }
 
     @RequestMapping(method=RequestMethod.GET, value="/{groupId}/users")
@@ -56,9 +50,7 @@ public class GroupController {
 
     @RequestMapping(method=RequestMethod.POST, value="/create")
     public Group createGroup(@RequestParam("groupname") String groupname) {
-        Group group = new Group(groupname);
-        groups.add(group);
-        return group;
+        return this.groupJDBCTemplate.create(groupname);
     }
 
     private final AtomicLong counter = new AtomicLong();
@@ -66,16 +58,12 @@ public class GroupController {
     @RequestMapping(method=RequestMethod.POST, value="/add")
     public Group AddUser(@RequestParam("groupId") int groupId, @RequestParam("userId") int userId) {
         new GroupParticipant(counter.incrementAndGet(),groupId,userId);
-        return this.getGroups(groupId);
+        return this.getGroup(groupId);
     }
 
     @RequestMapping(method=RequestMethod.DELETE)
     public boolean deleteGroups(@RequestParam("groupId") int groupId) {
-        for (Group group : groups) {
-            if (group.groupId == groupId) {
-                return groups.remove(group);
-            }
-        }
+
         return false;
     }
 }
