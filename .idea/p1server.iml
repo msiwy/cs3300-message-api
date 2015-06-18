@@ -3,7 +3,11 @@
   <component name="FacetManager">
     <facet type="Spring" name="Spring">
       <configuration>
+<<<<<<< Updated upstream
         <fileset id="fileset2" name="Spring Application Context" removed="false">
+=======
+        <fileset id="fileset" name="Spring Application" removed="false">
+>>>>>>> Stashed changes
           <file>file://$MODULE_DIR$/project/src/main/java/resources/bean.xml</file>
         </fileset>
       </configuration>

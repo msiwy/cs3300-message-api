@@ -29,7 +29,11 @@ public class Message {
     }
 
     public int getSenderId() {
+<<<<<<< Updated upstream
         return this.senderId;
+=======
+        return this.messageId;
+>>>>>>> Stashed changes
     }
 
     public Timestamp getDateCreated() {

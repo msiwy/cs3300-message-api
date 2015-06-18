@@ -1,4 +1,5 @@
 main/java/restful/Application.class
+<<<<<<< Updated upstream
 main/java/restful/GroupJDBCTemplate.class
 main/java/restful/MessageController.class
 main/java/restful/MessageJDBCTemplate.class
@@ -16,3 +17,7 @@ main/java/restful/UserMapper.class
 main/java/restful/UserController.class
 main/java/restful/Greeting.class
 main/java/restful/Group.class
+=======
+main/java/restful/UserJDBCTemplate.class
+main/java/restful/User.class
+>>>>>>> Stashed changes
