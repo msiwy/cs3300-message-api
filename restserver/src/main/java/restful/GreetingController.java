@@ -22,33 +22,8 @@ public class GreetingController {
 
         String gName = String.format(template, name);
 
-        Connection conn = null;
-        PreparedStatement stmt = null;
-        ResultSet rset = null;
-        int last_inserted_id = -1;
-        try {
-            conn = RDS.getDatasource().getConnection();
-            String sql = "INSERT INTO Greeting (name) VALUES (?)";
-
-            stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            stmt.setString(1, gName);
-
-            stmt.executeUpdate();
-            rset = stmt.getGeneratedKeys();
-
-            if(rset.next())
-            {
-                last_inserted_id = rset.getInt(1);
-            }
-
-        } catch (SQLException sqe) {
-            System.err.println("SQL ERROR");
-            sqe.printStackTrace();
-        } finally {
-            try { if (rset != null) rset.close(); } catch(Exception e) { }
-            try { if (stmt != null) stmt.close(); } catch(Exception e) { }
-	        try { if (conn != null) conn.close(); } catch(Exception e) { }
-        }
+        String sql = "INSERT INTO Greeting (name) VALUES (?)";
+        int last_inserted_id = RDS.updateAndGetGenKey(sql, gName);
 
         return new Greeting(last_inserted_id,
                 String.format(template, name));
