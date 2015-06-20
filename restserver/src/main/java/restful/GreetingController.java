@@ -2,9 +2,6 @@ package restful;
 
 import java.sql.*;
 
-import org.springframework.jdbc.core.PreparedStatementCreator;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,7 +27,7 @@ public class GreetingController {
         ResultSet rset = null;
         int last_inserted_id = -1;
         try {
-            conn = Application.getDatasource().getConnection();
+            conn = RDS.getDatasource().getConnection();
             String sql = "INSERT INTO Greeting (name) VALUES (?)";
 
             stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);

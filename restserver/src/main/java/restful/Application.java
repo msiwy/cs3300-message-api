@@ -10,21 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class Application {
-
-    private static MysqlDataSource ds;
-
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
-    }
-
-    public static MysqlDataSource getDatasource() {
-        if(ds == null) {
-            ds = new MysqlDataSource();
-            ds.setServerName("aaguzohhf6ht13.c1jgqriefhdd.us-east-1.rds.amazonaws.com");
-            ds.setDatabaseName("cs3300");
-            ds.setUser("cs3300");
-            ds.setPassword("J4nOBNgx");
-         }
-        return ds;
     }
 }
