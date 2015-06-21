@@ -21,7 +21,7 @@ public class UserDao {
     public List<User> getAllUsers() {
         String SQL = "SELECT * FROM User";
         List<Map<String,Object>> rows = RDS.getTemplate().queryForList(SQL);
-        List<User> users = new ArrayList<>();
+        List<User> users = new ArrayList<User>();
         for (Map row : rows) {
             User user = new User((Integer)row.get("userId"), (String)row.get("username"));
             users.add(user);
