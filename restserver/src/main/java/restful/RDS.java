@@ -29,7 +29,7 @@ public class RDS {
     public static MysqlDataSource getDatasource() {
         if(ds == null) {
             ds = new MysqlDataSource();
-            ds.setServerName("aaguzohhf6ht13.c1jgqriefhdd.us-east-1.rds.amazonaws.com");
+            ds.setServerName("ebdb.c1jgqriefhdd.us-east-1.rds.amazonaws.com");
             ds.setDatabaseName("cs3300");
             ds.setUser("cs3300");
             ds.setPassword("J4nOBNgx");
