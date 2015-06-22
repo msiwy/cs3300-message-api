@@ -17,30 +17,29 @@ public class MessageController {
         this.dao = new MessageDao();
     }
 
-    @RequestMapping(value="/all")
+    /**
+     * Function currently not needed - not listed in our documentation
+     */
+//    @RequestMapping(value="/all")
     public List<Message> getMessages() {
         return this.dao.getAllMessages();
     }
 
-    @RequestMapping(method= RequestMethod.GET,value="/{messageId}")
+    /**
+     * Function currently not needed - not listed in our documentation
+     */
+//    @RequestMapping(method= RequestMethod.GET,value="/{messageId}")
     public Message getMessage(@PathVariable("messageId") int messageId) {
         return this.dao.getMessage(messageId);
     }
 
-
+    /**
+     * Status - Not functional
+     * TODO - PRIORITY VERY HIGH - Make sure this is functional. Should take in an array of recipicentIds not a groupId
+     */
     @RequestMapping(method=RequestMethod.POST)
     public Message createMessage(@RequestParam("senderId") int senderId, @RequestParam("content") String content, @RequestParam("groupId") int groupId, @RequestParam("documentId") int documentId) {
         return this.dao.create(senderId,content,groupId,documentId);
     }
-    /*
-    @RequestMapping(method=RequestMethod.DELETE, value="/messages")
-    public boolean deleteMessage(@RequestParam("messageId") int messageId) {
-        for (Message mess : messages) {
-            if (mess.messageId == messageId) {
-                return messages.remove(mess);
-            }
-        }
-        return false;
-    }
-    */
+
 }
