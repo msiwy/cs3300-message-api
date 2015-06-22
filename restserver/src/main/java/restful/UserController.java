@@ -78,6 +78,11 @@ public class UserController {
      *       { ... }
      *   ]
      */
+    @RequestMapping(method=RequestMethod.GET, value="/{userId}/groups")
+    public List<Group> getUserGroups(@PathVariable("userId") int userId) {
+        List<Group> groups = this.dao.getUserGroups(userId);
+        return groups;
+    }
 
     /**
      * Status - Unchecked
