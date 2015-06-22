@@ -120,7 +120,7 @@ POST /users?username="Ted"
 	{ "username" : "Ted", "userId" : 2345546 }
 ```
    
-### Update user info
+### Update user info - Status Incomplete
 To update information of an existing user, send a POST request to /users/<userId>/update with the parameter username.
 #### Requests
 ```
@@ -196,7 +196,7 @@ GET /groups/<groupId>
 ```
 { "groupname":"Klaus", "groupId":1 }
 ```
-### Get all users in a group
+### Get all users in a group - Status Incomplete
 #### Request
 ```
 GET /groups/{groupId}/users
@@ -209,7 +209,7 @@ GET /groups/{groupId}/users
 	{...}
 ]
 ```
-### Get all messages in a group
+### Get all messages in a group - Status Incomplete
 #### Request
 ```
 GET /groups/{groupId}/messages
@@ -268,7 +268,7 @@ Failure
 ```
 
 ## Messages
-### Send a message
+### Send a message - Status Incomplete
 To send a message, send a POST request to /message as a JSON object containing the parameters: senderId, recipientIds, and content.
 #### Request
 | Request Parameter | Type | Description  |
@@ -298,7 +298,7 @@ Message
 }
 ```
 ## Notifications
-### Get a user's notifications
+### Get a user's notifications - Status Incomplete
 The client should periodically send GET requests to  /notifications/{userId} to retrieve notifications on messages sent to that user.
 #### Request
 ```
