@@ -1,9 +1,6 @@
 package restful;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Created by shauvik on 6/20/15.
@@ -57,5 +54,17 @@ public class UserDao {
         String query = "DELETE FROM User WHERE userId = %d";
         String SQL = String.format(query,userId);
         RDS.getTemplate().update(SQL);
+    }
+
+    public List<Group> getUserGroups(int userId) {
+        String query = "SELECT gp.`groupId`, g.`groupName` from GroupParticipant gp, `Group` g WHERE gp.`groupId` = g.`groupId` AND gp.`userId` = %d";
+        String SQL = String.format(query,userId);
+        List<Map<String, Object>> listGrps = RDS.getTemplate().queryForList(SQL);
+        List<Group> groups = new ArrayList<>();
+        for(Map<String, Object> row : listGrps){
+            Group g = new Group((Integer)row.get("groupId"), (String)row.get("groupName"));
+            groups.add(g);
+        }
+        return groups;
     }
 }
