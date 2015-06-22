@@ -274,11 +274,11 @@ To send a message, send a POST request to /message as a JSON object containing t
 | Request Parameter | Type | Description  |
 | ------------- | ------------- | ------------ |
 | senderId | int | The userId of the user sending the message  |
-| groupId | int | The groupId the message |
+| recipientIds | int[] | The groupId the message |
 | content | String | The contents of the message being sent |
 ```
-POST /messages?senderId=<senderId>&groupId=<groupId>&content=<content>
-POST /messages?senderId=123&groupId=456&content="Hello"
+POST /messages?senderId=<senderId>&recipientIds=[<recipientIds>]&content=<content>
+POST /messages?senderId=123&recipientIds=[456]&content="Hello"
 ```
 #### Response
 | Response Variables | Type | Description  |
