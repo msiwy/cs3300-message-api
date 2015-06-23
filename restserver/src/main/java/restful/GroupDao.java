@@ -73,6 +73,19 @@ public class GroupDao {
         return messages;
     }
 
+    public List<User> getMembers(int groupId) {
+//        {"userId" : 1234, "username" : "Ted"},
+        String query = "SELECT u.userId, u.userName FROM User u, GroupParticipant gp WHERE u.userId = gp.userId AND groupId = %d";
+        String SQL = String.format(query, groupId);
+        List<Map<String,Object>> rows = RDS.getTemplate().queryForList(SQL);
+        List<User> users = new ArrayList<>();
+        for (Map row : rows) {
+            User user = new User((Integer)row.get("userId"), (String)row.get("userName"));
+            users.add(user);
+        }
+        return users;
+    }
+
 
 
     //    public Group getGroup(int groupId) {

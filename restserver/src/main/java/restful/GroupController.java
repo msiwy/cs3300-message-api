@@ -42,8 +42,8 @@ public class GroupController {
     }
 
     /**
-     * Status - Not implemented
-     * TODO - PRIORITY VERY HIGH - Implement
+     * Status - IMPLEMENTED
+     * TODO - DONE
      * Example:
      * [
      *      {"userId" : 1234, "username" : "Ted"},
@@ -52,8 +52,8 @@ public class GroupController {
      * ]
      */
     @RequestMapping(method=RequestMethod.GET, value="/{groupId}/users")
-    public Group getMembers(@PathVariable("groupId") int groupId) {
-        return null;
+    public List<User> getMembers(@PathVariable("groupId") int groupId) {
+        return this.dao.getMembers(groupId);
     }
 
     /**
