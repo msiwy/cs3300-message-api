@@ -14,7 +14,7 @@ public class UserDao {
         User user;
         try {
             user = RDS.getTemplate().queryForObject(query, args, new UserMapper());
-        } catch (DataAccessException e) {
+        } catch (Exception e) {
             user = new User(-1, null);
         }
         return user;
@@ -37,7 +37,7 @@ public class UserDao {
         User user;
         try {
             user = RDS.getTemplate().queryForObject(SQL, new UserMapper());
-        } catch (DataAccessException e) {
+        } catch (Exception e) {
             user = new User(-1, null);
         }
         return user;

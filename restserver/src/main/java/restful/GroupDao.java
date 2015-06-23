@@ -1,5 +1,6 @@
 package restful;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -63,10 +64,10 @@ public class GroupDao {
             Message message = new Message(
                     (Integer)row.get("messageId"),
                     (Integer)row.get("senderId"),
-                    (TimeStamp)row.get("dateCreated"),
+                    new Timestamp((long)row.get("dataCreated")),
                     (String)row.get("content"),
-                    null,
-                    null)
+                    -1,
+                    -1);
             messages.add(message);
         }
         return messages;
