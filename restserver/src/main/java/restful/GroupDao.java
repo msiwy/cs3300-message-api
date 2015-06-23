@@ -31,6 +31,7 @@ public class GroupDao {
         Random rand = new Random(100);
         //int rn = rand.nextInt();
         int groupId = (groupName).hashCode();
+
         String query = "INSERT INTO `Group` (groupId, groupName) VALUES (%d, '%s')";
         String SQL = String.format(query,groupId,groupName);
         RDS.getTemplate().update(SQL);
