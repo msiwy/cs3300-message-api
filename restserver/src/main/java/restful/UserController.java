@@ -20,7 +20,7 @@ public class UserController {
 
     /**
      * STATUS - Working
-     * TODO - PRIORITY MEDIUM - Return -1 if the username does not exist in the table
+     * TODO
      */
     @RequestMapping(value="/auth")
     public User auth(@RequestParam("username") String username) {
