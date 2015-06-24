@@ -55,7 +55,7 @@ public class GroupDao {
 
     public List<Message> getMessages(int groupId) {
 //        "messageId": 100, "senderId" : 1000, "dateCreated" : 34623754762354, "content" : "Hey Doug."
-        String query = "SELECT messgaeId, senderId, dateCreated, content FROM Messages WHERE groupId = %d";
+        String query = "SELECT messgaeId, senderId, dateCreated, content FROM Message WHERE groupId = %d";
         String SQL = String.format(query, groupId);
         List<Map<String,Object>> rows = RDS.getTemplate().queryForList(SQL);
         List<Message> messages = new ArrayList<>();
@@ -64,7 +64,7 @@ public class GroupDao {
             Message message = new Message(
                     (Integer)row.get("messageId"),
                     (Integer)row.get("senderId"),
-                    new Timestamp((long)row.get("dataCreated")),
+                    (TimeStamp)row.get("dateCreated"),
                     (String)row.get("content"),
                     -1,
                     -1);

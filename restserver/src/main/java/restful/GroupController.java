@@ -43,7 +43,6 @@ public class GroupController {
 
     /**
      * Status - IMPLEMENTED
-     * TODO - DONE
      * Example:
      * [
      *      {"userId" : 1234, "username" : "Ted"},
@@ -67,8 +66,8 @@ public class GroupController {
      * ]
      */
     @RequestMapping(method=RequestMethod.GET, value="/{groupId}/messages")
-    public Group getMessages(@PathVariable("groupId") int groupId) {
-        return null;
+    public List<Message> getMessages(@PathVariable("groupId") int groupId) {
+        return this.dao.getMessages(groupId);
     }
 
     /**
@@ -86,8 +85,19 @@ public class GroupController {
      */
     @RequestMapping(method=RequestMethod.POST, value="/add")
     public Group AddUser(@RequestParam("groupId") int groupId, @RequestParam("userId") int userId) {
-        new GroupParticipant(counter.incrementAndGet(),groupId,userId);
+        this.dao.addUserToGroup(groupId, userId);
+//        new GroupParticipant(counter.incrementAndGet(),groupId,userId);
         return this.getGroup(groupId);
+    }
+
+    /**
+     *
+     * Status - Not Implemented
+     * TODO - PRIORITY MEDIUM - Remove a user from a group
+     */
+    @RequestMapping(method=RequestMethod.DELETE, value="/{groupId}/{userId}")
+    public Group deleteUserFromGroup(@PathVariable("groupdId") int groupId, @PathVariable("userId") int userId) {
+        
     }
 
     /**
