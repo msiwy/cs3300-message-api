@@ -303,17 +303,19 @@ Message
 }
 ```
 ## Notifications
-### Get a user's notifications - Status Incomplete
-The client should periodically send GET requests to  /notifications/{userId} to retrieve notifications on messages sent to that user.
+### Get a user's notifications 
+The client should periodically send GET requests to  /notifications?userId=<user_id>&type=<notification_status> to retrieve notifications on messages sent to that user. After you send the request, all notifications fetched will be marked as read
 #### Request
 ```
-GET /notifications/{userId}
+GET /notifications?userId=<user_id>&type=<notification_status>
+GET /notifications?userId=7&type=unread
+GET /notifications?userId=7&type=all
 ```
 #### Response
 ```
 [
-	{ "messageId": 100, "senderId" : 1234, "dateCreated" : 34623754762354, "content" : "Hey Doug", },
-	{ "messageId": 101, "senderId" : 1235, "dateCreated" : 34623754762378, "content" : "Hey Ted, thanks for the text",  }
+	{"userId":7,"messageId":41,"senderId":151,"groupId":-1760030452,"dateReceived":1435181536000,"readState":false,"content":"Hello-514"},
+	{"userId":7,"messageId":42,"senderId":151,"groupId":-1760030452,"dateReceived":1435181556000,"readState":false,"content":"Hello-532"}
 ]
 ```
 
