@@ -33,10 +33,8 @@ public class MessageController {
     }
 
     /**
-     * Status - Not functional
-     * TODO - PRIORITY VERY HIGH - Make sure this is functional. Should take in an array of recipicentIds not a groupId
-     * REORDER Param list
-     * Fix documentId - @RequestParam(value = "documentId", required = false) int documentId
+     * Status - Working
+     * TODO - PRIORITY LOW - Fix documentId - @RequestParam(value = "documentId", required = false) int documentId
      */
     @RequestMapping(method=RequestMethod.POST)
     public Message sendMessage(@RequestParam("senderId") int senderId,
