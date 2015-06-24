@@ -20,7 +20,7 @@ public class UserController {
 
     /**
      * STATUS - Working
-     * TODO - PRIORITY MEDIUM - Return -1 if the username does not exist in the table
+     * TODO
      */
     @RequestMapping(value="/auth")
     public User auth(@RequestParam("username") String username) {
@@ -50,7 +50,7 @@ public class UserController {
 
     /**
      * Status - Working
-     * TODO - PRIORITY HIGH - Allow names to be in quotes and format the input values properly into DB (IE : not adding "" or / to DB)
+     * TODO - PRIORITY HIGH - Check if userFormat (in UserDao) method is working correctly, then port to groups and messages (IE : not adding "" or / to DB)
      */
     @RequestMapping(method=RequestMethod.POST)
     public User createUser(@RequestParam("username") String username) {
@@ -69,7 +69,8 @@ public class UserController {
     }
 
     /**
-     *  Status - Complete
+     *  Status - Implemented
+     *  TODO - Check if return values comply with readme
      */
     @RequestMapping(method=RequestMethod.GET, value="/{userId}/groups")
     public List<Group> getUserGroups(@PathVariable("userId") int userId) {

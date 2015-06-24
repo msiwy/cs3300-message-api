@@ -1,5 +1,8 @@
 package restful;
 
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
+
 import java.util.*;
 
 /**
@@ -11,7 +14,13 @@ public class UserDao {
     public User getUserByName(String username) {
         String query = "SELECT * FROM User WHERE username = ?";
         Object [] args = {username};
-        User user = RDS.getTemplate().queryForObject(query, args, new UserMapper());
+        User user;
+        try {
+            user = RDS.getTemplate().queryForObject(query, args, new UserMapper());
+        } catch (DataAccessException e) {
+            System.out.println("catch");
+            user = new User(-1, null);
+        }
         return user;
     }
 
@@ -28,12 +37,19 @@ public class UserDao {
 
     public User getUser(int userId) {
         String query = "SELECT * FROM User WHERE userId = %d";
-        String SQL = String.format(query,userId);
-        User user = RDS.getTemplate().queryForObject(SQL, new UserMapper());
+        String SQL = String.format(query, userId);
+        User user;
+        try {
+            user = RDS.getTemplate().queryForObject(SQL, new UserMapper());
+        } catch (Exception e) {
+            user = new User(-1, null);
+        }
         return user;
     }
 
     public User create(String username) {
+        //format username
+        username = formatUsername(username);
         Random rand = new Random(100);
         //int rn = rand.nextInt();
         int userId = (username).hashCode();
@@ -42,6 +58,19 @@ public class UserDao {
         RDS.getTemplate().update(SQL);
         //System.out.println("Created Record Name = " + name + " Age = " + age);
         return new User(userId,username);
+    }
+
+    private String formatUsername(String username) {
+        StringBuilder name = new StringBuilder(username);
+        int a = name.indexOf("\"");
+        int b = name.indexOf("\"", a);
+        int c = name.indexOf("\\");
+        int d = name.indexOf("\\", c);
+        name.deleteCharAt(a);
+        name.deleteCharAt(b);
+        name.deleteCharAt(c);
+        name.deleteCharAt(d);
+        return name.toString();
     }
 
     public User update(int userId, String username) {
@@ -67,4 +96,5 @@ public class UserDao {
         }
         return groups;
     }
+
 }

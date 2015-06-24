@@ -2,6 +2,9 @@ package restful;
 
 import java.util.*;
 
+import java.sql.Timestamp;
+
+
 /**
  * Created by magnussiwy on 6/21/15.
  */
@@ -19,7 +22,7 @@ public class GroupDao {
 
     public Group getGroup(int groupId) {
         String query = "SELECT * FROM `Group` WHERE groupId = %d";
-        String SQL = String.format(query,groupId);
+        String SQL = String.format(query, groupId);
         Group group = RDS.getTemplate().queryForObject(SQL, new GroupMapper());
         return group;
     }
@@ -31,6 +34,7 @@ public class GroupDao {
         Random rand = new Random(100);
         //int rn = rand.nextInt();
         int groupId = (groupName).hashCode();
+
         String query = "INSERT INTO `Group` (groupId, groupName) VALUES (%d, '%s')";
         String SQL = String.format(query,groupId,groupName);
         RDS.getTemplate().update(SQL);
@@ -59,6 +63,39 @@ public class GroupDao {
         String SQL = "UPDATE `Group` SET groupname = '%s' WHERE groupId = %d";
         RDS.getTemplate().update(SQL, groupname, groupId);
         return new Group(groupId, groupname);
+    }
+
+    public List<Message> getMessages(int groupId) {
+//        "messageId": 100, "senderId" : 1000, "dateCreated" : 34623754762354, "content" : "Hey Doug."
+        String query = "SELECT messgaeId, senderId, dateCreated, content FROM Messages WHERE groupId = %d";
+        String SQL = String.format(query, groupId);
+        List<Map<String,Object>> rows = RDS.getTemplate().queryForList(SQL);
+        List<Message> messages = new ArrayList<>();
+        for (Map row : rows) {
+            Group group = new Group((Integer)row.get("groupId"), (String)row.get("groupname"));
+            Message message = new Message(
+                    (Integer)row.get("messageId"),
+                    (Integer)row.get("senderId"),
+                    new Timestamp((long)row.get("dataCreated")),
+                    (String)row.get("content"),
+                    -1,
+                    -1);
+            messages.add(message);
+        }
+        return messages;
+    }
+
+    public List<User> getMembers(int groupId) {
+//        {"userId" : 1234, "username" : "Ted"},
+        String query = "SELECT u.userId, u.userName FROM User u, GroupParticipant gp WHERE u.userId = gp.userId AND groupId = %d";
+        String SQL = String.format(query, groupId);
+        List<Map<String,Object>> rows = RDS.getTemplate().queryForList(SQL);
+        List<User> users = new ArrayList<>();
+        for (Map row : rows) {
+            User user = new User((Integer)row.get("userId"), (String)row.get("userName"));
+            users.add(user);
+        }
+        return users;
     }
 
 
