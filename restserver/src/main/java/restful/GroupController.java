@@ -57,8 +57,8 @@ public class GroupController {
     }
 
     /**
-     * Status - Not implemented
-     * TODO - PRIORITY VERY HIGH - Implement
+     * Status - Implemented
+     * TODO - PRIORITY VERY HIGH - Check if working (look out for TimeStamp dateCreated)
      * Example:
      * [
      *      { "messageId": 100, "senderId" : 1000, "dateCreated" : 34623754762354, "content" : "Hey Doug." },
@@ -67,8 +67,8 @@ public class GroupController {
      * ]
      */
     @RequestMapping(method=RequestMethod.GET, value="/{groupId}/messages")
-    public Group getMessages(@PathVariable("groupId") int groupId) {
-        return null;
+    public List<Message> getMessages(@PathVariable("groupId") int groupId) {
+        return dao.getMessages(groupId);
     }
 
     /**
@@ -82,7 +82,8 @@ public class GroupController {
 
 
     /**
-     * Status - Unchecked
+     * Status - Non Implemented
+     * TODO - PRIORITY MEDIUM
      */
     @RequestMapping(method=RequestMethod.POST, value="/add")
     public Group AddUser(@RequestParam("groupId") int groupId, @RequestParam("userId") int userId) {

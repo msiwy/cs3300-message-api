@@ -18,7 +18,6 @@ public class UserDao {
         try {
             user = RDS.getTemplate().queryForObject(query, args, new UserMapper());
         } catch (DataAccessException e) {
-            System.out.println("catch");
             user = new User(-1, null);
         }
         return user;
