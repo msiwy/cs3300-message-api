@@ -82,13 +82,13 @@ public class GroupController {
 
 
     /**
-     * Status - Non Implemented
+     * Status - Fixed @shauvik
      * TODO - PRIORITY MEDIUM
      */
     @RequestMapping(method=RequestMethod.POST, value="/add")
     public Group AddUser(@RequestParam("groupId") int groupId, @RequestParam("userId") int userId) {
-        new GroupParticipant(counter.incrementAndGet(),groupId,userId);
-        return this.getGroup(groupId);
+        this.dao.addUserToGroup(groupId, userId);
+        return this.dao.getGroup(groupId);
     }
 
     /**

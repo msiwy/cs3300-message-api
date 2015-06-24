@@ -59,18 +59,14 @@ public class UserDao {
         return new User(userId,username);
     }
 
+    // Fixed @shauvik
     private String formatUsername(String username) {
-        StringBuilder name = new StringBuilder(username);
-        int a = name.indexOf("\"");
-        int b = name.indexOf("\"", a);
-        int c = name.indexOf("\\");
-        int d = name.indexOf("\\", c);
-        name.deleteCharAt(a);
-        name.deleteCharAt(b);
-        name.deleteCharAt(c);
-        name.deleteCharAt(d);
-        return name.toString();
+        String formatted = null;
+        if(username != null)
+            formatted = username.replaceAll("\"", "").replace("\\", "");
+        return formatted;
     }
+
 
     public User update(int userId, String username) {
         String SQL = "UPDATE User SET username = '%s' WHERE userId = %d";
