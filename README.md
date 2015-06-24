@@ -274,7 +274,7 @@ To send a message, send a POST request to /message as a JSON object containing t
 | Request Parameter | Type | Description  |
 | ------------- | ------------- | ------------ |
 | senderId | int | The userId of the user sending the message  |
-| recipientIds | int[] | The groupId the message. |
+| recipientIds | String[] | The userIds for the users the message is being sent to. Note it is a String array |
 | content | String | The contents of the message being sent |
 ```
 POST /messages?senderId=<senderId>&recipientIds=<recipientIds>&content=<content>
