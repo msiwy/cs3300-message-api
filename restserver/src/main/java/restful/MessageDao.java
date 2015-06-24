@@ -15,6 +15,7 @@ import java.util.*;
  */
 public class MessageDao {
     GroupDao groupDao = new GroupDao();
+    NotificationDao notificationDao = new NotificationDao();
 
     public List<Message> getAllMessages() {
         String SQL = "SELECT * FROM Message";
@@ -57,7 +58,9 @@ public class MessageDao {
         int messageId = keyHolder.getKey().intValue();
 
         // Returns the new Message
-        return RDS.getTemplate().queryForObject("SELECT * FROM Message WHERE messageId = ?", new Object[]{ messageId}, new MessageMapper());
+        Message message = RDS.getTemplate().queryForObject("SELECT * FROM Message WHERE messageId = ?", new Object[]{ messageId}, new MessageMapper());
+        notificationDao.generateNotifications(message);
+        return message;
     }
 
     public List<Message> getMessageByMessageId(String messageId) { // return in order by time
@@ -116,6 +119,7 @@ public class MessageDao {
         if (rs.size() == 1) {
             // Group already exists - use that id
             groupId = rs.get(0).intValue();
+
         } else if (rs.size() == 0) {
             // Recipients and sender combination is unique - create a unique groupId
             groupId = groupParticipants.toString().hashCode();
