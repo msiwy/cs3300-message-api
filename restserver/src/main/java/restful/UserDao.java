@@ -93,15 +93,4 @@ public class UserDao {
         return groups;
     }
 
-    public List<Group> getUserGr(int userId) {
-        String query = "SELECT groupId, groupName FROM GroupParticipant JOIN Group WHERE userId = %d";
-        String SQL = String.format(query,userId);
-        List<Map<String, Object>> listGrps = RDS.getTemplate().queryForList(SQL);
-        List<Group> groups = new ArrayList<>();
-        for(Map<String, Object> row : listGrps){
-            Group g = new Group((Integer)row.get("groupId"), (String)row.get("groupName"));
-            groups.add(g);
-        }
-        return groups;
-    }
 }

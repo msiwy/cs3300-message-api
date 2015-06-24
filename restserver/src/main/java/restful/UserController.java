@@ -69,8 +69,8 @@ public class UserController {
     }
 
     /**
-     *  Status - Not implemented
-     *  TODO - PRIORITY HIGH - Add function for getting all groups a user belongs to /users/<userId>/groups
+     *  Status - Implemented
+     *  TODO - Check if return values comply with readme
      *  Example:
      *  [
      *        { "groupId":24328, "groupname":"Water Cooler" },
