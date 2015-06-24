@@ -196,7 +196,7 @@ GET /groups/<groupId>
 ```
 { "groupname":"Klaus", "groupId":1 }
 ```
-### Get all users in a group - Status Incomplete
+### Get all users in a group
 #### Request
 ```
 GET /groups/{groupId}/users
