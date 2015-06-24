@@ -1,9 +1,6 @@
 package restful;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Created by magnussiwy on 6/21/15.
@@ -27,7 +24,10 @@ public class GroupDao {
         return group;
     }
 
-    public Group create(String groupName) {
+    /**
+     * TODO - Handle Optional groupName, groupId's can collide based on other create group (need to think of solution)
+     */
+    public Group create(String groupName) { //boolean uniqueRecipients
         Random rand = new Random(100);
         //int rn = rand.nextInt();
         int groupId = (groupName).hashCode();
@@ -36,6 +36,16 @@ public class GroupDao {
         RDS.getTemplate().update(SQL);
         //System.out.println("Created Record Name = " + name + " Age = " + age);
         return new Group(groupId,groupName);
+    }
+
+    /**
+     * Use with sending a message
+     * TODO - combine with both create groups
+     */
+    public void createGroupFromMessage(int groupId) {
+        String query = "INSERT INTO `Group` (groupId, groupName) VALUES (%d, '%s')";
+        String SQL = String.format(query, groupId, "");
+        RDS.getTemplate().update(SQL);
     }
 
     public int addUserToGroup(int groupId, int userId) {
@@ -50,6 +60,8 @@ public class GroupDao {
         RDS.getTemplate().update(SQL, groupname, groupId);
         return new Group(groupId, groupname);
     }
+
+
 
     //    public Group getGroup(int groupId) {
 //        String query = "SELECT * FROM Group WHERE groupId = %d";

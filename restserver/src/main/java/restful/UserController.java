@@ -69,14 +69,7 @@ public class UserController {
     }
 
     /**
-     *  Status - Not implemented
-     *  TODO - PRIORITY HIGH - Add function for getting all groups a user belongs to /users/<userId>/groups
-     *  Example:
-     *  [
-     *        { "groupId":24328, "groupname":"Water Cooler" },
-     *       { "groupId":93243, "groupname":"CS 3251 Project" },
-     *       { ... }
-     *   ]
+     *  Status - Complete
      */
     @RequestMapping(method=RequestMethod.GET, value="/{userId}/groups")
     public List<Group> getUserGroups(@PathVariable("userId") int userId) {
