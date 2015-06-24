@@ -1,5 +1,8 @@
 package restful;
 
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
+
 import java.util.*;
 
 /**
@@ -14,7 +17,8 @@ public class UserDao {
         User user;
         try {
             user = RDS.getTemplate().queryForObject(query, args, new UserMapper());
-        } catch (Exception e) {
+        } catch (DataAccessException e) {
+            System.out.println("catch");
             user = new User(-1, null);
         }
         return user;

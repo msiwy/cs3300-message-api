@@ -50,7 +50,7 @@ public class UserController {
 
     /**
      * Status - Working
-     * TODO - PRIORITY HIGH - Allow names to be in quotes and format the input values properly into DB (IE : not adding "" or / to DB)
+     * TODO - PRIORITY HIGH - Check if userFormat (in UserDao) method is working correctly, then port to groups and messages (IE : not adding "" or / to DB)
      */
     @RequestMapping(method=RequestMethod.POST)
     public User createUser(@RequestParam("username") String username) {
