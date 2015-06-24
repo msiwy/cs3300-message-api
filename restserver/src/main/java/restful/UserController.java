@@ -71,12 +71,6 @@ public class UserController {
     /**
      *  Status - Implemented
      *  TODO - Check if return values comply with readme
-     *  Example:
-     *  [
-     *        { "groupId":24328, "groupname":"Water Cooler" },
-     *       { "groupId":93243, "groupname":"CS 3251 Project" },
-     *       { ... }
-     *   ]
      */
     @RequestMapping(method=RequestMethod.GET, value="/{userId}/groups")
     public List<Group> getUserGroups(@PathVariable("userId") int userId) {

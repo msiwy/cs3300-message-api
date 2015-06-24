@@ -1,15 +1,14 @@
 package restful;
 
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 /**
  * Created by magnussiwy on 6/21/15.
  */
+@RestController
+@RequestMapping("/messages")
 public class MessageController {
     MessageDao dao;
 
@@ -36,10 +35,13 @@ public class MessageController {
     /**
      * Status - Not functional
      * TODO - PRIORITY VERY HIGH - Make sure this is functional. Should take in an array of recipicentIds not a groupId
+     * REORDER Param list
+     * Fix documentId - @RequestParam(value = "documentId", required = false) int documentId
      */
     @RequestMapping(method=RequestMethod.POST)
-    public Message createMessage(@RequestParam("senderId") int senderId, @RequestParam("content") String content, @RequestParam("groupId") int groupId, @RequestParam("documentId") int documentId) {
-        return this.dao.create(senderId,content,groupId,documentId);
+    public Message sendMessage(@RequestParam("senderId") int senderId,
+                                 @RequestParam("recipientIds") String[] recipientIds,
+                                 @RequestParam("content") String content) {
+        return this.dao.sendMessage(senderId, recipientIds, content);
     }
-
 }
