@@ -274,27 +274,29 @@ To send a message, send a POST request to /message as a JSON object containing t
 | Request Parameter | Type | Description  |
 | ------------- | ------------- | ------------ |
 | senderId | int | The userId of the user sending the message  |
-| recipientIds | int[] | The groupId the message |
+| recipientIds | int[] | The groupId the message. |
 | content | String | The contents of the message being sent |
 ```
-POST /messages?senderId=<senderId>&recipientIds=[<recipientIds>]&content=<content>
-POST /messages?senderId=123&recipientIds=[456]&content="Hello"
+POST /messages?senderId=<senderId>&recipientIds=<recipientIds>&content=<content>
+POST /messages?senderId=4&recipientIds=6,5,9,10&content="Hello-844"
 ```
 #### Response
 | Response Variables | Type | Description  |
 | ------------- | ------------- | ------------ |
 | success | boolean | Returns true if the message was delivered  |
 | messageId | int | The generated GUID for the message |
-| groupId | int | The GUID of the group the message belongs to |
+| dateCreated | long | Time in milliseconds that the message was sent |
+| groupId | int | If it is a unqiue combination of sender and recipients a new groupId is created, otherwise it will use the groupId that already exists |
+| content | String | The contents of the message |
+
 ```
 Message
 {
 	"messageId": 19
 	"senderId": 123
-	"dateCreated":"2015-01-15 01:00:03"
+	"dateCreated":"1435121073000"
 	"content": "Woof"
 	"groupId": 12
-	"documentId": 112
 }
 ```
 ## Notifications
