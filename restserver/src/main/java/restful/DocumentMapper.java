@@ -10,7 +10,7 @@ import java.sql.SQLException;
  */
 public class DocumentMapper implements RowMapper<Document> {
     public Document mapRow(ResultSet rs, int rowNum) throws SQLException {
-        Document document = new Document(rs.getInt("documentId"), rs.getString("name"), rs.getString("type"));
+        Document document = new Document(rs.getInt("documentId"), rs.getString("name"), rs.getString("type"), rs.getString("filepath"));
         return document;
     }
 }
