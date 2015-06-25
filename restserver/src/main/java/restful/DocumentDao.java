@@ -11,7 +11,7 @@ public class DocumentDao {
         return document;
     }
 
-    public Document addDocument(String name, String type) {
+    public Document create(String name, String type) {
         int documentId = (name + type).hashCode();
         String query = "INSERT INTO Documents (documentId, name, type) VALUES (%d, %s, %s)";
         String SQL = String.format(query, documentId, name, type);

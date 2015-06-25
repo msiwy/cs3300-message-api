@@ -26,7 +26,7 @@ public class DocumentController {
 
     @RequestMapping(method = RequestMethod.POST)
     public Document addDocument(@RequestParam("name") String name, @RequestParam("type") String type) {
-        return this.dao.addDocument(name, type);
+        return this.dao.create(name, type);
     }
 
 
