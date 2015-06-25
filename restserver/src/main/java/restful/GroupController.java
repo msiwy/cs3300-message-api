@@ -89,6 +89,7 @@ public class GroupController {
     public Group AddUser(@RequestParam("groupId") int groupId, @RequestParam("userId") int userId) {
         this.dao.addUserToGroup(groupId, userId);
         return this.dao.getGroup(groupId);
+
     }
 
     /**
