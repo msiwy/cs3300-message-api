@@ -42,11 +42,13 @@ public class NotificationDao {
         List<User> usersWithNotifications = groupDao.getMembers(message.getGroupId());
 
         // Remove sender from usersWithNotifications list
+        User sender = null;
         for (User u : usersWithNotifications) {
             if (u.getUserId() == message.getSenderId()) {
-                usersWithNotifications.remove(u);
+                sender = u;
             }
         }
+        usersWithNotifications.remove(sender);
 
         // readState defaults to false (unread)
         String query = "INSERT INTO Notification (userId, messageId, senderId, groupId, dateReceived, content) " +
