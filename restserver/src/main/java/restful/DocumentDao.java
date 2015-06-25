@@ -28,8 +28,8 @@ public class DocumentDao {
     public Document create(String name, String type, String filepath ) {
         try {
             int documentId = (name + type).hashCode();
-//            File image = new File(filepath);
-            File image = new File("/Users/samford/Desktop/sprite.png");
+            File image = new File(filepath);
+//            File image = new File("/Users/samford/Desktop/sprite.png");
             System.out.println("\n\nFile Created\n\n");
             InputStream imageIs = new FileInputStream(image);
             System.out.println("\n\nInputStream\n\n");
